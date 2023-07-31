@@ -12,7 +12,7 @@ public class TheLogLevelsProperty
     public void ShallBeInitialized()
     {
         // act
-        IList<LogLevel> logLevels = LogLevel.LogLevels;
+        IReadOnlyCollection<LogLevel> logLevels = LogLevel.LogLevels;
 
         // assert
         logLevels.Should().BeEquivalentTo(new LogLevel[]
