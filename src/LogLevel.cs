@@ -47,8 +47,6 @@ public readonly struct LogLevel : IEquatable<LogLevel>
 
     public static bool operator>=(LogLevel left, LogLevel right) => left == right || left > right;
 
-    public static void Register
-
     public override bool Equals(object? other)
     {
         if (other is LogLevel logLevel)
