@@ -11,14 +11,14 @@ public class TheInsertLogLevelBeforeMethod
     [TestInitialize]
     public void TestInitialize()
     {
-        LogLevel.ResetLogLevels();
+        LogLevel.ResetOrder();
     }
 
     [TestMethod]
     public void ShallInsertANewLogLevelBeforeTheGivenLogLevel()
     {
         // assert
-        LogLevel.LogLevels.Should().BeEquivalentTo(new LogLevel[]
+        LogLevel.Order.Should().Equal(new LogLevel[]
         {
             LogLevel.Info, LogLevel.Warning, LogLevel.Error,
         });
@@ -27,7 +27,7 @@ public class TheInsertLogLevelBeforeMethod
         LogLevel logLevel = LogLevel.InsertLogLevelBefore(LogLevel.Info, "Debug", "Debugging information.");
 
         // assert
-        LogLevel.LogLevels.Should().BeEquivalentTo(new LogLevel[]
+        LogLevel.Order.Should().Equal(new LogLevel[]
         {
             logLevel, LogLevel.Info, LogLevel.Warning, LogLevel.Error,
         });

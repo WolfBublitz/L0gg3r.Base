@@ -1,3 +1,9 @@
+// ----------------------------------------------------------------------------
+// <copyright file="LogLevel.cs" company="L0gg3r">
+// Copyright (c) L0gg3r Project
+// </copyright>
+// ----------------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -5,24 +11,28 @@ using System.Linq;
 
 namespace L0gg3r.Base;
 
-
 /// <summary>
 /// The log level.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
-public readonly struct LogLevel : IEquatable<LogLevel>
+public readonly struct LogLevel : IEquatable<LogLevel>, IComparable, IComparable<LogLevel>
 {
-    private static int nextId;
-
-    private readonly int id;
-
-    private static Lazy<List<LogLevel>> logLevels = new(() => new List<LogLevel>
+    private static Lazy<List<LogLevel>> order = new(() => new List<LogLevel>
     {
         Info,
         Warning,
         Error,
     });
 
+    private static int nextId;
+
+    private readonly int id;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LogLevel"/> struct.
+    /// </summary>
+    /// <param name="name">The name of the <see cref="LogLevel"/>.</param>
+    /// <param name="description">An optional description.</param>
     internal LogLevel(string name, string? description = null)
     {
         id = nextId++;
@@ -31,71 +41,120 @@ public readonly struct LogLevel : IEquatable<LogLevel>
         Description = description;
     }
 
+    /// <summary>
+    /// Gets the <see cref="LogLevel.Info"/> log level.
+    /// </summary>
     public static LogLevel Info { get; } = new("Info");
 
+    /// <summary>
+    /// Gets the <see cref="LogLevel.Warning"/> log level.
+    /// </summary>
     public static LogLevel Warning { get; } = new("Warning");
 
+    /// <summary>
+    /// Gets the <see cref="LogLevel.Error"/> log level.
+    /// </summary>
     public static LogLevel Error { get; } = new("Error");
 
-    public static IReadOnlyList<LogLevel> LogLevels => logLevels.Value;
+    /// <summary>
+    /// Gets the order of the <see cref="LogLevel"/>s.
+    /// </summary>
+    /// <remarks>
+    /// The order of the <see cref="LogLevel"/>s is a list of <see cref="LogLevel"/>s ordered by their severity. The
+    /// default order is <see cref="Info"/>, <see cref="Warning"/>, <see cref="Error"/>.
+    /// </remarks>
+    /// <seealso cref="InsertLogLevelBefore(LogLevel, string, string)"/>
+    /// <seealso cref="InsertLogLevelAfter(LogLevel, string, string)"/>
+    /// <seealso cref="ResetOrder"/>
+    public static IReadOnlyList<LogLevel> Order => order.Value;
 
+    /// <summary>
+    /// Gets the name of the <see cref="LogLevel"/>.
+    /// </summary>
     public string Name { get; }
 
+    /// <summary>
+    /// Gets the description of the <see cref="LogLevel"/>.
+    /// </summary>
     public string? Description { get; }
 
     public static bool operator ==(LogLevel left, LogLevel right) => left.id == right.id;
 
     public static bool operator !=(LogLevel left, LogLevel right) => !(left.id == right.id);
 
-    public static bool operator <(LogLevel left, LogLevel right) => logLevels.Value.IndexOf(left) < logLevels.Value.IndexOf(right);
+    public static bool operator <(LogLevel left, LogLevel right) => order.Value.IndexOf(left) < order.Value.IndexOf(right);
 
     public static bool operator <=(LogLevel left, LogLevel right) => left == right || left < right;
 
-    public static bool operator >(LogLevel left, LogLevel right) => logLevels.Value.IndexOf(left) > logLevels.Value.IndexOf(right);
+    public static bool operator >(LogLevel left, LogLevel right) => order.Value.IndexOf(left) > order.Value.IndexOf(right);
 
     public static bool operator >=(LogLevel left, LogLevel right) => left == right || left > right;
 
+    /// <summary>
+    /// Inserts a new <see cref="LogLevel"/> with <paramref name="name"/> and <paramref name="description"/> before <paramref name="logLevel"/>
+    /// in the <see cref="Order"/> of <see cref="LogLevel"/>s.
+    /// </summary>
+    /// <param name="logLevel">The <see cref="LogLevel"/> before which the new <see cref="LogLevel"/> shall be inserted.</param>
+    /// <param name="name">The name of the new <see cref="LogLevel"/>.</param>
+    /// <param name="description">The optional description of the new <see cref="LogLevel"/>.</param>
+    /// <returns>The newly created <see cref="LogLevel"/>.</returns>
+    /// <exception cref="ArgumentException">Thrown when a same-named <see cref="LogLevel"/> already exists in the <see cref="Order"/> of <see cref="LogLevel"/>s or
+    /// when the <see cref="Order"/> of <see cref="LogLevels"/> does not contain <paramref name="logLevel"/>.</exception>
     public static LogLevel InsertLogLevelBefore(LogLevel logLevel, string name, string description = "")
     {
-        if (logLevels.Value.Any(ll => ll.Name == name))
+        if (order.Value.Any(ll => ll.Name == name))
         {
             throw new ArgumentException($"The log level {logLevel.Name} already exists.");
         }
 
-        if (!logLevels.Value.Contains(logLevel))
+        if (!order.Value.Contains(logLevel))
         {
             throw new ArgumentException($"The log level {logLevel.Name} does not exist.");
         }
 
         LogLevel newLogLevel = new(name, description);
 
-        logLevels.Value.Insert(logLevels.Value.IndexOf(logLevel), newLogLevel);
+        order.Value.Insert(order.Value.IndexOf(logLevel), newLogLevel);
 
         return newLogLevel;
     }
 
+    /// <summary>
+    /// Inserts a new <see cref="LogLevel"/> with <paramref name="name"/> and <paramref name="description"/> after <paramref name="logLevel"/>
+    /// in the <see cref="Order"/> of <see cref="LogLevel"/>s.
+    /// </summary>
+    /// <param name="logLevel">The <see cref="LogLevel"/> after which the new <see cref="LogLevel"/> shall be inserted.</param>
+    /// <param name="name">The name of the new <see cref="LogLevel"/>.</param>
+    /// <param name="description">The optional description of the new <see cref="LogLevel"/>.</param>
+    /// <returns>The newly created <see cref="LogLevel"/>.</returns>
+    /// <exception cref="ArgumentException">Thrown when a same-named <see cref="LogLevel"/> already exists in the <see cref="Order"/> of <see cref="LogLevel"/>s or
+    /// when the <see cref="Order"/> of <see cref="LogLevels"/> does not contain <paramref name="logLevel"/>.</exception>
     public static LogLevel InsertLogLevelAfter(LogLevel logLevel, string name, string description = "")
     {
-        if (logLevels.Value.Any(ll => ll.Name == name))
+        if (order.Value.Any(ll => ll.Name == name))
         {
             throw new ArgumentException($"The log level {logLevel.Name} already exists.");
         }
 
-        if (!logLevels.Value.Contains(logLevel))
+        if (!order.Value.Contains(logLevel))
         {
             throw new ArgumentException($"The log level {logLevel.Name} does not exist.");
         }
 
         LogLevel newLogLevel = new(name, description);
 
-        logLevels.Value.Insert(logLevels.Value.IndexOf(logLevel) + 1, newLogLevel);
+        order.Value.Insert(order.Value.IndexOf(logLevel) + 1, newLogLevel);
 
         return newLogLevel;
     }
 
-    public static void ResetLogLevels()
+    /// <summary>
+    /// Resets the <see cref="Order"/> of <see cref="LogLevel"/>s to the default order.
+    /// </summary>
+    /// <seealso cref="Order"/>
+    public static void ResetOrder()
     {
-        logLevels = new Lazy<List<LogLevel>>(() => new List<LogLevel>
+        order = new Lazy<List<LogLevel>>(() => new List<LogLevel>
         {
             Info,
             Warning,
@@ -103,9 +162,10 @@ public readonly struct LogLevel : IEquatable<LogLevel>
         });
     }
 
-    public override bool Equals(object? other)
+    /// <inheritdoc/>
+    public override bool Equals(object? obj)
     {
-        if (other is LogLevel logLevel)
+        if (obj is LogLevel logLevel)
         {
             return Equals(logLevel);
         }
@@ -113,9 +173,43 @@ public readonly struct LogLevel : IEquatable<LogLevel>
         return false;
     }
 
-    public bool Equals(LogLevel logLevel) => this == logLevel;
+    /// <inheritdoc/>
+    public bool Equals(LogLevel other) => this == other;
 
-    public override int GetHashCode() => id.GetHashCode() + Name.GetHashCode();
+    /// <inheritdoc/>
+    public int CompareTo(object? obj)
+    {
+        if (obj is LogLevel logLevel)
+        {
+            return CompareTo(logLevel);
+        }
+        else
+        {
+            throw new ArgumentException($"Object must be of type {nameof(LogLevel)}");
+        }
+    }
+
+    /// <inheritdoc/>
+    public int CompareTo(LogLevel other)
+    {
+        if (this == other)
+        {
+            return 0;
+        }
+
+        if (this < other)
+        {
+            return -1;
+        }
+
+        return 1;
+    }
+
+    /// <inheritdoc/>
+    public override int GetHashCode() => id.GetHashCode() + Name.GetHashCode(StringComparison.InvariantCulture);
+
+    /// <inheritdoc/>
+    public override string ToString() => Name;
 
     private string GetDebuggerDisplay() => $"LogLevel: {Name}";
 }
