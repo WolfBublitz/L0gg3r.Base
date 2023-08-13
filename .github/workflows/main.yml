@@ -1,4 +1,4 @@
-name: .NET Core
+name: Build and Publish
 
 on:
   push:
@@ -33,5 +33,7 @@ jobs:
         run: dotnet pack --configuration Release
       - name: Publish the package to GPR
         run: dotnet nuget push src/bin/Release/*.nupkg --source "github"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
