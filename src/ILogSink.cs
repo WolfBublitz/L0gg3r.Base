@@ -19,7 +19,7 @@ public interface ILogSink : IAsyncDisposable
     /// </summary>
     /// <param name="logMessage">The log message to process.</param>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-    Task ProcessAsync(LogMessage logMessage);
+    Task ProcessAsync(in LogMessage logMessage);
 
     /// <summary>
     /// Flushes the log sink asynchronously.

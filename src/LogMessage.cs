@@ -14,28 +14,25 @@ namespace L0gg3r.Base;
 /// A log message.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
-public readonly struct LogMessage : IEquatable<LogMessage>
+public readonly record struct LogMessage : IEquatable<LogMessage>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="LogMessage"/> struct.
+    /// Initializes a new instance of the <see cref="LogMessage"/> class.
     /// </summary>
     public LogMessage()
     {
-        Timestamp = DateTime.Now;
-        LogLevel = LogLevel.Info;
-        Senders = Array.Empty<string>();
     }
 
     /// <summary>
     /// Gets the timestamp.
     /// </summary>
-    public DateTime Timestamp { get; init; }
+    public DateTime Timestamp { get; init; } = DateTime.Now;
 
     /// <summary>
     /// Gets the <see cref="LogLevel"/>.
     /// </summary>
     /// <seealso cref="LogLevel"/>
-    public readonly LogLevel LogLevel { get; init; }
+    public readonly LogLevel LogLevel { get; init; } = LogLevel.Info;
 
     /// <summary>
     /// Gets the payload.
@@ -45,33 +42,7 @@ public readonly struct LogMessage : IEquatable<LogMessage>
     /// <summary>
     /// Gets the list of sender.
     /// </summary>
-    public IReadOnlyCollection<string> Senders { get; init; }
-
-    public static bool operator ==(LogMessage left, LogMessage right)
-    {
-        return left.Equals(right);
-    }
-
-    public static bool operator !=(LogMessage left, LogMessage right)
-    {
-        return !left.Equals(right);
-    }
-
-    /// <inheritdoc/>
-    public override bool Equals(object? obj)
-    {
-        if (obj is null)
-        {
-            return false;
-        }
-
-        if (obj is LogMessage logMessage)
-        {
-            return Equals(logMessage);
-        }
-
-        return false;
-    }
+    public IReadOnlyCollection<string> Senders { get; init; } = Array.Empty<string>();
 
     /// <inheritdoc/>
     public bool Equals(LogMessage other) => GetHashCode() == other.GetHashCode();

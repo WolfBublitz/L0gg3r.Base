@@ -1,3 +1,5 @@
 {
-    "dotnet.defaultSolution": "L0gg3r.Base.sln"
+    "dotnet.defaultSolution": "L0gg3r.Base.sln",
+    "docify.commentService.docstringFormat": "XML",
+    "docify.commentService.programmingLanguage": "c_sharp"
 }
