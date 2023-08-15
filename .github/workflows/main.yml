@@ -31,6 +31,24 @@ jobs:
         with:
           name: nuget-package
           path: src/bin/Release/*.nupkg
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version:  |
+            7.0.x
+      - name: "Add NuGet Source"
+        run: dotnet nuget add source "https://nuget.pkg.github.com/WolfBublitz/index.json" --username WolfBublitz --password ${GITHUB_TOKEN} --store-password-in-clear-text --name github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Test
+        run: dotnet test --configuration Release
+
 #      - name: Publish to GitHub
 #        run: dotnet nuget push src/bin/Release/*.nupkg -s github
 
