@@ -12,9 +12,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
         with:
@@ -22,18 +20,18 @@ jobs:
       - uses: actions/setup-dotnet@v3
         with:
           dotnet-version:  |
-            6.0.x
             7.0.x
-            8.0.x
+      - uses: actions/upload-artifact@v2
+        with:
+          name: nuget-package
+          path: src/bin/Release/*.nupkg
       - name: "Add NuGet Source"
         run: dotnet nuget add source "https://nuget.pkg.github.com/WolfBublitz/index.json" --username WolfBublitz --password ${GITHUB_TOKEN} --store-password-in-clear-text --name github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create the package
         run: dotnet pack --configuration Release
-      - name: Publish to GitHub
-        run: dotnet nuget push src/bin/Release/*.nupkg -s github
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Publish to GitHub
+#        run: dotnet nuget push src/bin/Release/*.nupkg -s github
 
 
