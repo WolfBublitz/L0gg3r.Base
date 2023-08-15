@@ -18,6 +18,8 @@ public class TheDisposeAsyncMethod
         logMessagePipeline.AttachOutputHandler(logMessage =>
         {
             logMessages.Add(logMessage);
+
+            return Task.CompletedTask;
         });
 
         // act

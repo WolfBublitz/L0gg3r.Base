@@ -31,6 +31,8 @@ public class TheTransformProperty
         logMessagePipeline.AttachOutputHandler(logMessage =>
         {
             receivedLogMessages.Add(logMessage);
+
+            return Task.CompletedTask;
         });
 
         // act

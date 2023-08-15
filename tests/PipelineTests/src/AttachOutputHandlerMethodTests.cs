@@ -16,9 +16,11 @@ public class TheAttachOutputHandlerMethod
         LogMessagePipeline logMessagePipeline = new();
         TaskCompletionSource<bool> taskCompletionSource = new();
 
-        void Handler(LogMessage _)
+        Task Handler(LogMessage _)
         {
             taskCompletionSource.SetResult(true);
+
+            return Task.CompletedTask;
         }
 
         // act
@@ -38,14 +40,18 @@ public class TheAttachOutputHandlerMethod
         TaskCompletionSource<int> taskCompletionSource1 = new();
         TaskCompletionSource<int> taskCompletionSource2 = new();
 
-        void Handler1(LogMessage _)
+        Task Handler1(LogMessage _)
         {
             taskCompletionSource1.SetResult(1);
+
+            return Task.CompletedTask;
         }
 
-        void Handler2(LogMessage _)
+        Task Handler2(LogMessage _)
         {
             taskCompletionSource2.SetResult(2);
+
+            return Task.CompletedTask;
         }
 
         // act
@@ -81,7 +87,7 @@ public class TheAttachOutputHandlerMethod
         await logMessagePipeline.DisposeAsync().ConfigureAwait(false);
 
         // act
-        Action action = () => logMessagePipeline.AttachOutputHandler(_ => { });
+        Action action = () => logMessagePipeline.AttachOutputHandler(_ => Task.CompletedTask);
 
         // assert
         action.Should().Throw<ObjectDisposedException>();

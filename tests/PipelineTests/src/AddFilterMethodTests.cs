@@ -21,6 +21,8 @@ public class TheAttachFilterMethod
         logMessagePipeline.AttachOutputHandler(logMessage =>
         {
             taskCompletionSource.SetResult(logMessage);
+
+            return Task.CompletedTask;
         });
 
         // act
@@ -56,6 +58,8 @@ public class TheAttachFilterMethod
         logMessagePipeline.AttachOutputHandler(logMessage =>
         {
             taskCompletionSource.SetResult(logMessage);
+
+            return Task.CompletedTask;
         });
 
         // act

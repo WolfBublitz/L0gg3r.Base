@@ -23,6 +23,8 @@ public class ThePostMethod
         pipeline.AttachOutputHandler(logMessage =>
         {
             receivedLogMessage = logMessage;
+
+            return Task.CompletedTask;
         });
 
         // act
