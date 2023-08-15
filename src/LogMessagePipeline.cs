@@ -104,7 +104,7 @@ public sealed class LogMessagePipeline : IAsyncDisposable
     /// <param name="outputHandler">The output handler to attach.</param>
     /// <returns>An <see cref="IDisposable"/> that detaches the <paramref name="outputHandler"/> on dispose.</returns>
     /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
-    public IDisposable AttachOutputHandler(Action<LogMessage> outputHandler)
+    public IDisposable AttachOutputHandler(Func<LogMessage, Task> outputHandler)
     {
         if (isDiposed)
         {
