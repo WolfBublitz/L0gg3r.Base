@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTests.LogLevelTests.LogLevelOrderTests;
 
 [TestClass]
+[TestCategory("UnitTests")]
 public class TheOrder
 {
     [TestMethod]

@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace PipelineTests.DisposeAsyncMethodTests;
 
 [TestClass]
+[TestCategory("PipelineTests")]
 public class TheDisposeAsyncMethod
 {
     [TestMethod]

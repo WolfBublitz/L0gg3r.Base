@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace PipelineTests.TransformPropertyTests;
 
 [TestClass]
+[TestCategory("PipelineTests")]
 public class TheTransformProperty
 {
     [TestMethod]

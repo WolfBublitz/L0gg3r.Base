@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTests.LogMessageTests;
 
 [TestClass]
+[TestCategory("UnitTests")]
 public class TheConstructor
 {
     [TestMethod]

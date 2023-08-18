@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace PipelineTests.AttachOutputHandlerMethodTests;
 
 [TestClass]
+[TestCategory("PipelineTests")]
 public class TheAttachOutputHandlerMethod
 {
     [TestMethod]

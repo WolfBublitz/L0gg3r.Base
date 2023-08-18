@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTests.LogLevelTests.LessThanOperatorTests;
 
 [TestClass]
+[TestCategory("UnitTests")]
 public class TheLessThanOperator
 {
     [DataTestMethod]

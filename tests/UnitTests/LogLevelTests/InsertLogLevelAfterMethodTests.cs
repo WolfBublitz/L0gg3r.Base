@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTests.LogLevelTests.InsertLogLevelAfterMethodTests;
 
 [TestClass]
+[TestCategory("UnitTests")]
 public class TheInsertLogLevelAfterMethod
 {
     [TestInitialize]

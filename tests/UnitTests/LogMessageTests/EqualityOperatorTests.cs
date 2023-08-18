@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTests.LogMessageTests.EqualityOperatorTests;
 
 [TestClass]
+[TestCategory("UnitTests")]
 public class TheEqualityOperator
 {
     [DataTestMethod]

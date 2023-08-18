@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTests.LogLevelTests.OrderPropertyTests;
 
 [TestClass]
+[TestCategory("UnitTests")]
 public class TheOrderProperty
 {
     [TestMethod]

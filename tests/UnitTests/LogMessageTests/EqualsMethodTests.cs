@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTests.LogMessageTests.EqualsMethodTests;
 
 [TestClass]
+[TestCategory("UnitTests")]
 public class TheEqualsMethod
 {
     [DataTestMethod]

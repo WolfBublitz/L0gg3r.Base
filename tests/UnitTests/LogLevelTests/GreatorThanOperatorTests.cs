@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTests.LogLevelTests.GreatorThanOperatorTests;
 
 [TestClass]
+[TestCategory("UnitTests")]
 public class TheGreatorThanOperator
 {
     [DataTestMethod]

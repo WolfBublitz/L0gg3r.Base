@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace PipelineTests.AddFilterMethodTests;
 
 [TestClass]
+[TestCategory("PipelineTests")]
 public class TheAttachFilterMethod
 {
     [TestMethod]

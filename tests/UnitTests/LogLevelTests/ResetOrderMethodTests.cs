@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTests.LogLevelTests.ResetOrderMethodTests;
 
 [TestClass]
+[TestCategory("UnitTests")]
 public class TheResetOrderMethod
 {
     [TestMethod]

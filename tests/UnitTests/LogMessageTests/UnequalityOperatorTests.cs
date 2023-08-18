@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace UnitTests.LogMessageTests.UnequalityOperatorTests;
 
 [TestClass]
+[TestCategory("UnitTests")]
 public class TheUnequalityOperator
 {
     [DataTestMethod]

@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace PipelineTests.PostMethodTests;
 
 [TestClass]
+[TestCategory("PipelineTests")]
 public class ThePostMethod
 {
     [TestMethod]
