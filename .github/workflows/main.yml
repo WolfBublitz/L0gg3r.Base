@@ -91,7 +91,7 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-    needs: [build, PipelineTests, UnitTests]
+    needs: [build, Tests]
     steps:
       - uses: actions/download-artifact@v3
         with:
