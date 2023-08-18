@@ -31,27 +31,13 @@ jobs:
         with:
           name: nuget-package
           path: src/bin/Release/*.nupkg
-  PipelineTests:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version:  |
-            7.0.x
-      - name: "Add NuGet Source"
-        run: dotnet nuget add source "https://nuget.pkg.github.com/WolfBublitz/index.json" --username WolfBublitz --password ${GITHUB_TOKEN} --store-password-in-clear-text --name github
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Install dependencies
-        run: dotnet restore
-      - name: Test
-        run: dotnet test --configuration Release --filter "TestCategory=PipelineTests"
 
-  UnitTests:
+  Tests:
     runs-on: ubuntu-latest
     needs: build
+    strategy:
+      matrix:
+        test-category: ['PipelineTests', 'UnitTests']
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-dotnet@v3
@@ -65,7 +51,43 @@ jobs:
       - name: Install dependencies
         run: dotnet restore
       - name: Test
-        run: dotnet test --configuration Release --filter "TestCategory=UnitTests"
+        run: dotnet test --configuration Release --filter "TestCategory=${{ matrix.test-category }}"
+
+  # PipelineTests:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-dotnet@v3
+  #       with:
+  #         dotnet-version:  |
+  #           7.0.x
+  #     - name: "Add NuGet Source"
+  #       run: dotnet nuget add source "https://nuget.pkg.github.com/WolfBublitz/index.json" --username WolfBublitz --password ${GITHUB_TOKEN} --store-password-in-clear-text --name github
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Install dependencies
+  #       run: dotnet restore
+  #     - name: Test
+  #       run: dotnet test --configuration Release --filter "TestCategory=PipelineTests"
+
+  # UnitTests:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-dotnet@v3
+  #       with:
+  #         dotnet-version:  |
+  #           7.0.x
+  #     - name: "Add NuGet Source"
+  #       run: dotnet nuget add source "https://nuget.pkg.github.com/WolfBublitz/index.json" --username WolfBublitz --password ${GITHUB_TOKEN} --store-password-in-clear-text --name github
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Install dependencies
+  #       run: dotnet restore
+  #     - name: Test
+  #       run: dotnet test --configuration Release --filter "TestCategory=UnitTests"
 
   publish:
     runs-on: ubuntu-latest
