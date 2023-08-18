@@ -65,6 +65,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to GitHub
-        run: dotnet nuget push src/bin/Release/*.nupkg -s github
+        run: dotnet nuget push ./src/bin/Release/*.nupkg -s github
 
 
