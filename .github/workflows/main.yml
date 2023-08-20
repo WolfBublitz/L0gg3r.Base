@@ -64,6 +64,8 @@ jobs:
         run: dotnet nuget add source "https://nuget.pkg.github.com/WolfBublitz/index.json" --username WolfBublitz --password ${GITHUB_TOKEN} --store-password-in-clear-text --name github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: test
+        run: echo ${{ github.workspace }}
       - name: Publish to GitHub
         run: dotnet nuget push ${{ github.workspace }}/src/bin/Release/*.nupkg -s github
 
