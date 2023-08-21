@@ -9,7 +9,7 @@ using System;
 namespace L0gg3r.Base;
 
 /// <summary>
-/// Disposes a filter <see cref="Predicate"/>.
+/// Disposes a filter <see cref="Predicate{T}"/>.
 /// </summary>
 internal sealed class FilterDisposer : IDisposable
 {
@@ -20,7 +20,7 @@ internal sealed class FilterDisposer : IDisposable
     /// <summary>
     /// Initializes a new instance of the <see cref="FilterDisposer"/> class.
     /// </summary>
-    /// <param name="filter">The filter <see cref="Predicate"/> that shall be removed on dispose.</param>
+    /// <param name="filter">The filter <see cref="Predicate{T}"/> that shall be removed on dispose.</param>
     /// <param name="logMessagePipeline">The <see cref="LogMessagePipeline"/> the <paramref name="filter"/> is attached to.</param>
     public FilterDisposer(Predicate<LogMessage> filter, LogMessagePipeline logMessagePipeline)
     {
