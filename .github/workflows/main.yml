@@ -12,11 +12,13 @@ on:
 
 jobs:
   BuildNugetPackage:
+    name: Build Nuget Package
     uses: ./.github/workflows/build-nuget-package.yml
     with:
       configuration: Release
 
   PipelineTests:
+    name: Pipeline Tests
     needs: [BuildNugetPackage]
     uses: ./.github/workflows/execute-test.yml
     with:
@@ -24,6 +26,7 @@ jobs:
       project_path: ./tests/PipelineTests/src
 
   UnitTests:
+    name: Unit Tests
     needs: [BuildNugetPackage]
     uses: ./.github/workflows/execute-test.yml
     with:
@@ -31,6 +34,7 @@ jobs:
       project_path: ./tests/UnitTests
 
   PublishToGithub:
+    name: Publish to Github
     needs: [PipelineTests,UnitTests ]
     uses: ./.github/workflows/publish-to-github.yml
     with:
