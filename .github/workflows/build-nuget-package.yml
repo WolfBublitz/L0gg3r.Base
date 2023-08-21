@@ -3,6 +3,7 @@ name: Build Nuget Package
 on:
   workflow_call:
     inputs:
+      github_token:
       configuration:
         required: true
         type: string

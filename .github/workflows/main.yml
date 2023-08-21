@@ -30,18 +30,9 @@ jobs:
       configuration: Release
       project_path: ./tests/UnitTests
 
-  # publish:
-  #   runs-on: ubuntu-latest
-  #   needs: [Build, Tests]
-  #   steps:
-  #     - uses: actions/download-artifact@v3
-  #       with:
-  #         name: nuget-package
-  #     - name: "Add NuGet Source"
-  #       run: dotnet nuget add source "https://nuget.pkg.github.com/WolfBublitz/index.json" --username WolfBublitz --password ${GITHUB_TOKEN} --store-password-in-clear-text --name github
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #     - name: Publish to GitHub
-  #       run: dotnet nuget push ./src/bin/Release/*.nupkg -s github
+  PublishToGithub:
+    uses: ./.github/workflows/publish-to-github.yml
+    with:
+      package_path: ./src/bin/Release/L0gg3r.Base.*.nupkg
 
 
