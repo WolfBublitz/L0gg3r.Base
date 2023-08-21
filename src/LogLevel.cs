@@ -195,9 +195,6 @@ public readonly record struct LogLevel : IEquatable<LogLevel>, IComparable, ICom
     }
 
     /// <inheritdoc/>
-    public bool Equals(LogLevel other) => this == other;
-
-    /// <inheritdoc/>
     public int CompareTo(object? obj)
     {
         if (obj is LogLevel logLevel)
