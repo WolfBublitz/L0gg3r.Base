@@ -31,6 +31,7 @@ jobs:
       project_path: ./tests/UnitTests
 
   PublishToGithub:
+    needs: [PipelineTests,UnitTests ]
     uses: ./.github/workflows/publish-to-github.yml
     with:
       package_path: ./src/bin/Release/L0gg3r.Base.*.nupkg
