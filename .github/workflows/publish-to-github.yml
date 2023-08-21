@@ -3,7 +3,7 @@ name: Publish To Github
 on:
   workflow_call:
     inputs:
-      package_path:
+      package-path:
         required: true
         type: string
 
