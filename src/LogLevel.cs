@@ -15,7 +15,7 @@ namespace L0gg3r.Base;
 /// The log level.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
-public readonly struct LogLevel : IEquatable<LogLevel>, IComparable, IComparable<LogLevel>
+public readonly record struct LogLevel : IEquatable<LogLevel>, IComparable, IComparable<LogLevel>
 {
     private static Lazy<List<LogLevel>> order = new(() => new List<LogLevel>
     {
@@ -29,7 +29,7 @@ public readonly struct LogLevel : IEquatable<LogLevel>, IComparable, IComparable
     private readonly int id;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="LogLevel"/> struct.
+    /// Initializes a new instance of the <see cref="LogLevel"/> class.
     /// </summary>
     /// <param name="name">The name of the <see cref="LogLevel"/>.</param>
     /// <param name="description">An optional description.</param>
@@ -78,17 +78,49 @@ public readonly struct LogLevel : IEquatable<LogLevel>, IComparable, IComparable
     /// </summary>
     public string? Description { get; }
 
-    public static bool operator ==(LogLevel left, LogLevel right) => left.id == right.id;
+    /// <summary>
+    /// Returns <c>true</c> if <paramref name="left"/> is less than <paramref name="right"/>.
+    /// </summary>
+    /// <param name="left">The <see cref="LogLevel"/> on the left side.</param>
+    /// <param name="right">The <see cref="LogLevel"/>on the right side.</param>
+    /// <returns><c>true</c> if <paramref name="left"/> is less than <paramref name="right"/>.</returns>
+    public static bool operator <(LogLevel left, LogLevel right)
+    {
+        return order.Value.IndexOf(left) < order.Value.IndexOf(right);
+    }
 
-    public static bool operator !=(LogLevel left, LogLevel right) => !(left.id == right.id);
+    /// <summary>
+    /// Returns <c>true</c> if <paramref name="left"/> is less or equal than <paramref name="right"/>.
+    /// </summary>
+    /// <param name="left">The <see cref="LogLevel"/> on the left side.</param>
+    /// <param name="right">The <see cref="LogLevel"/>on the right side.</param>
+    /// <returns><c>true</c> if <paramref name="left"/> is less or equal than <paramref name="right"/>.</returns>
+    public static bool operator <=(LogLevel left, LogLevel right)
+    {
+        return left == right || left < right;
+    }
 
-    public static bool operator <(LogLevel left, LogLevel right) => order.Value.IndexOf(left) < order.Value.IndexOf(right);
+    /// <summary>
+    /// Returns <c>true</c> if <paramref name="left"/> is greater than <paramref name="right"/>.
+    /// </summary>
+    /// <param name="left">The <see cref="LogLevel"/> on the left side.</param>
+    /// <param name="right">The <see cref="LogLevel"/>on the right side.</param>
+    /// <returns><c>true</c> if <paramref name="left"/> is greater than <paramref name="right"/>.</returns>
+    public static bool operator >(LogLevel left, LogLevel right)
+    {
+        return order.Value.IndexOf(left) > order.Value.IndexOf(right);
+    }
 
-    public static bool operator <=(LogLevel left, LogLevel right) => left == right || left < right;
-
-    public static bool operator >(LogLevel left, LogLevel right) => order.Value.IndexOf(left) > order.Value.IndexOf(right);
-
-    public static bool operator >=(LogLevel left, LogLevel right) => left == right || left > right;
+    /// <summary>
+    /// Returns <c>true</c> if <paramref name="left"/> is greater or equal than <paramref name="right"/>.
+    /// </summary>
+    /// <param name="left">The <see cref="LogLevel"/> on the left side.</param>
+    /// <param name="right">The <see cref="LogLevel"/>on the right side.</param>
+    /// <returns><c>true</c> if <paramref name="left"/> is greater or equal than <paramref name="right"/>.</returns>
+    public static bool operator >=(LogLevel left, LogLevel right)
+    {
+        return left == right || left > right;
+    }
 
     /// <summary>
     /// Inserts a new <see cref="LogLevel"/> with <paramref name="name"/> and <paramref name="description"/> before <paramref name="logLevel"/>
@@ -99,7 +131,7 @@ public readonly struct LogLevel : IEquatable<LogLevel>, IComparable, IComparable
     /// <param name="description">The optional description of the new <see cref="LogLevel"/>.</param>
     /// <returns>The newly created <see cref="LogLevel"/>.</returns>
     /// <exception cref="ArgumentException">Thrown when a same-named <see cref="LogLevel"/> already exists in the <see cref="Order"/> of <see cref="LogLevel"/>s or
-    /// when the <see cref="Order"/> of <see cref="LogLevels"/> does not contain <paramref name="logLevel"/>.</exception>
+    /// when the <see cref="Order"/> of <see cref="LogLevel"/> does not contain <paramref name="logLevel"/>.</exception>
     public static LogLevel InsertLogLevelBefore(LogLevel logLevel, string name, string description = "")
     {
         if (order.Value.Any(ll => ll.Name == name))
@@ -128,7 +160,7 @@ public readonly struct LogLevel : IEquatable<LogLevel>, IComparable, IComparable
     /// <param name="description">The optional description of the new <see cref="LogLevel"/>.</param>
     /// <returns>The newly created <see cref="LogLevel"/>.</returns>
     /// <exception cref="ArgumentException">Thrown when a same-named <see cref="LogLevel"/> already exists in the <see cref="Order"/> of <see cref="LogLevel"/>s or
-    /// when the <see cref="Order"/> of <see cref="LogLevels"/> does not contain <paramref name="logLevel"/>.</exception>
+    /// when the <see cref="Order"/> of <see cref="LogLevel"/>s does not contain <paramref name="logLevel"/>.</exception>
     public static LogLevel InsertLogLevelAfter(LogLevel logLevel, string name, string description = "")
     {
         if (order.Value.Any(ll => ll.Name == name))
@@ -160,17 +192,6 @@ public readonly struct LogLevel : IEquatable<LogLevel>, IComparable, IComparable
             Warning,
             Error,
         });
-    }
-
-    /// <inheritdoc/>
-    public override bool Equals(object? obj)
-    {
-        if (obj is LogLevel logLevel)
-        {
-            return Equals(logLevel);
-        }
-
-        return false;
     }
 
     /// <inheritdoc/>
