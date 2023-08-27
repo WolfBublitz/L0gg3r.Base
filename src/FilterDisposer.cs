@@ -29,5 +29,8 @@ internal sealed class FilterDisposer : IDisposable
     }
 
     /// <inheritdoc/>
-    public void Dispose() => logMessagePipeline.RemoveFilter(filter);
+    public void Dispose()
+    {
+        logMessagePipeline.RemoveFilter(filter);
+    }
 }
