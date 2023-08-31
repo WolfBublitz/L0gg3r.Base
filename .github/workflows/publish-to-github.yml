@@ -6,8 +6,6 @@ on:
       package-path:
         required: true
         type: string
-    release:
-      types: [created]
 
 jobs:
   Publish:
