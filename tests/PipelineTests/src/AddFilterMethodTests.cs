@@ -9,7 +9,7 @@ namespace PipelineTests.AddFilterMethodTests;
 
 [TestClass]
 [TestCategory("PipelineTests")]
-public class TheAttachFilterMethod
+public class TheAddFilterMethod
 {
     [TestMethod]
     public async Task ShallAddAFilter()
@@ -27,7 +27,7 @@ public class TheAttachFilterMethod
         });
 
         // act
-        logMessagePipeline.Post(new LogMessage { Payload = 1 });
+        logMessagePipeline.Write(new LogMessage { Payload = 1 });
         LogMessage logMessage1 = await taskCompletionSource.Task.ConfigureAwait(false);
 
         // assert
@@ -38,8 +38,8 @@ public class TheAttachFilterMethod
 
         using (IDisposable disposable = logMessagePipeline.AddFilter(logMessage => logMessage.Payload is int number && number == 2))
         {
-            logMessagePipeline.Post(new LogMessage { Payload = 1 });
-            logMessagePipeline.Post(new LogMessage { Payload = 2 });
+            logMessagePipeline.Write(new LogMessage { Payload = 1 });
+            logMessagePipeline.Write(new LogMessage { Payload = 2 });
         }
 
         LogMessage logMessage2 = await taskCompletionSource.Task.ConfigureAwait(false);
@@ -66,8 +66,8 @@ public class TheAttachFilterMethod
         // act
         using (IDisposable disposable = logMessagePipeline.AddFilter(logMessage => logMessage.Payload is int number && number == 2))
         {
-            logMessagePipeline.Post(new LogMessage { Payload = 1 });
-            logMessagePipeline.Post(new LogMessage { Payload = 2 });
+            logMessagePipeline.Write(new LogMessage { Payload = 1 });
+            logMessagePipeline.Write(new LogMessage { Payload = 2 });
 
             LogMessage logMessage1 = await taskCompletionSource.Task.ConfigureAwait(false);
 
@@ -78,7 +78,7 @@ public class TheAttachFilterMethod
         // act
         taskCompletionSource = new();
 
-        logMessagePipeline.Post(new LogMessage { Payload = 1 });
+        logMessagePipeline.Write(new LogMessage { Payload = 1 });
 
         LogMessage logMessage2 = await taskCompletionSource.Task.ConfigureAwait(false);
 
@@ -100,7 +100,7 @@ public class TheAttachFilterMethod
     }
 
     [TestMethod]
-    public async void ShallThrowObjectDisposedException()
+    public async Task ShallThrowObjectDisposedException()
     {
         // arrange
         LogMessagePipeline logMessagePipeline = new();

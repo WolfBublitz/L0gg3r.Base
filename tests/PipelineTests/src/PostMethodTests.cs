@@ -29,7 +29,7 @@ public class ThePostMethod
         });
 
         // act
-        pipeline.Post(logMessage);
+        pipeline.Write(logMessage);
         await pipeline.DisposeAsync().ConfigureAwait(false);
 
         // assert

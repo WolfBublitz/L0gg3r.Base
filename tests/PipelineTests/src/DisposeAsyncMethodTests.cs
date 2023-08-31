@@ -24,12 +24,15 @@ public class TheDisposeAsyncMethod
         });
 
         // act
-        logMessagePipeline.Post(new LogMessage { LogLevel = LogLevel.Info });
-        logMessagePipeline.Post(new LogMessage { LogLevel = LogLevel.Info });
-        logMessagePipeline.Post(new LogMessage { LogLevel = LogLevel.Info });
+        logMessagePipeline.Write(new LogMessage { LogLevel = LogLevel.Info, Payload = 1 });
+        logMessagePipeline.Write(new LogMessage { LogLevel = LogLevel.Info, Payload = 2 });
+        logMessagePipeline.Write(new LogMessage { LogLevel = LogLevel.Info, Payload = 3 });
         await logMessagePipeline.DisposeAsync().ConfigureAwait(false);
 
         // assert
         logMessages.Count.Should().Be(3);
+        logMessages[0].Payload.Should().Be(1);
+        logMessages[1].Payload.Should().Be(2);
+        logMessages[2].Payload.Should().Be(3);
     }
 }

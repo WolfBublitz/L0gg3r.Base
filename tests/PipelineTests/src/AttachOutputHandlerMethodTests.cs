@@ -26,7 +26,7 @@ public class TheAttachOutputHandlerMethod
 
         // act
         logMessagePipeline.AttachOutputHandler(Handler);
-        logMessagePipeline.Post(new LogMessage { LogLevel = LogLevel.Info });
+        logMessagePipeline.Write(new LogMessage { LogLevel = LogLevel.Info });
         bool result = await taskCompletionSource.Task.ConfigureAwait(false);
 
         // assert
@@ -59,7 +59,7 @@ public class TheAttachOutputHandlerMethod
         IDisposable disposable1 = logMessagePipeline.AttachOutputHandler(Handler1);
         IDisposable disposable2 = logMessagePipeline.AttachOutputHandler(Handler2);
         disposable1.Dispose();
-        logMessagePipeline.Post(new LogMessage { LogLevel = LogLevel.Info });
+        logMessagePipeline.Write(new LogMessage { LogLevel = LogLevel.Info });
         Task<int> task = await Task.WhenAny(taskCompletionSource1.Task, taskCompletionSource2.Task).ConfigureAwait(false);
         int result = await task.ConfigureAwait(false);
 
@@ -81,7 +81,7 @@ public class TheAttachOutputHandlerMethod
     }
 
     [TestMethod]
-    public async void ShallThrowObjectDisposedException()
+    public async Task ShallThrowObjectDisposedException()
     {
         // arrange
         LogMessagePipeline logMessagePipeline = new();

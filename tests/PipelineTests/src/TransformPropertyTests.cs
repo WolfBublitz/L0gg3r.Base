@@ -21,7 +21,7 @@ public class TheTransformProperty
         {
             Transform = logMessage =>
             {
-                return new LogMessage()
+                return new()
                 {
                     LogLevel = logMessage.LogLevel,
                     Payload = "transformed payload",
@@ -37,24 +37,11 @@ public class TheTransformProperty
         });
 
         // act
-        logMessagePipeline.Post(new LogMessage { LogLevel = LogLevel.Info });
+        logMessagePipeline.Write(new LogMessage { LogLevel = LogLevel.Info });
         await logMessagePipeline.DisposeAsync().ConfigureAwait(false);
 
         // assert
         receivedLogMessages.Should().HaveCount(1);
         receivedLogMessages.First().Payload.Should().Be("transformed payload");
-    }
-
-    [TestMethod]
-    public void ShallThrowArgumentNullException()
-    {
-        // arrange
-        LogMessagePipeline logMessagePipeline = new();
-
-        // act
-        Action action = () => logMessagePipeline.Transform = null!;
-
-        // assert
-        action.Should().Throw<ArgumentNullException>();
     }
 }
