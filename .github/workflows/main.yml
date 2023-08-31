@@ -42,3 +42,4 @@ jobs:
     uses: ./.github/workflows/publish-to-github.yml
     with:
       package-path: ./**/*.nupkg
+    if: github.event_name == 'release' && github.event.action == 'created'
