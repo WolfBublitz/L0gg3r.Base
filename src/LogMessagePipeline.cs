@@ -105,6 +105,17 @@ public sealed class LogMessagePipeline : IAsyncDisposable
     }
 
     /// <summary>
+    /// Removes the <see cref="Func{T, TResult}"/> output handler from the pipeline.
+    /// </summary>
+    /// <param name="outputHandler">The output handler to remove.</param>
+    public void RemoveOutputHandler(Func<LogMessage, Task> outputHandler)
+    {
+        Flush();
+
+        outputHandlers = outputHandlers.Remove(outputHandler);
+    }
+
+    /// <summary>
     /// Adds a filter <see cref="Predicate{T}"/> to the <see cref="LogMessagePipeline"/>.
     /// </summary>
     /// <param name="filter">The filter <see cref="Predicate{T}"/> to add.</param>
@@ -144,17 +155,6 @@ public sealed class LogMessagePipeline : IAsyncDisposable
     /// Flushes the <see cref="LogMessagePipeline"/> synchronously.
     /// </summary>
     public void Flush() => FlushAsync().GetAwaiter().GetResult();
-
-    /// <summary>
-    /// Removes the <see cref="Func{T, TResult}"/> output handler from the pipeline.
-    /// </summary>
-    /// <param name="outputHandler">The output handler to remove.</param>
-    internal void RemoveOutputHandler(Func<LogMessage, Task> outputHandler)
-    {
-        Flush();
-
-        outputHandlers = outputHandlers.Remove(outputHandler);
-    }
 
     /// <summary>
     /// Removes the filter <see cref="Predicate{T}"/> from the <see cref="LogMessagePipeline"/>.
