@@ -16,12 +16,20 @@ namespace L0gg3r.Base;
 [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
 public readonly record struct LogMessage : IEquatable<LogMessage>
 {
+    // ┌────────────────────────────────────────────────────────────────────────────────┐
+    // │ Public Constructors                                                            │
+    // └────────────────────────────────────────────────────────────────────────────────┘
+
     /// <summary>
     /// Initializes a new instance of the <see cref="LogMessage"/> class.
     /// </summary>
     public LogMessage()
     {
     }
+
+    // ┌────────────────────────────────────────────────────────────────────────────────┐
+    // │ Public Properties                                                              │
+    // └────────────────────────────────────────────────────────────────────────────────┘
 
     /// <summary>
     /// Gets the timestamp.
@@ -44,11 +52,18 @@ public readonly record struct LogMessage : IEquatable<LogMessage>
     /// </summary>
     public IReadOnlyCollection<string> Senders { get; init; } = Array.Empty<string>();
 
+    // ┌────────────────────────────────────────────────────────────────────────────────┐
+    // │ Public Methods                                                                 │
+    // └────────────────────────────────────────────────────────────────────────────────┘
+
     /// <inheritdoc/>
     public bool Equals(LogMessage other) => GetHashCode() == other.GetHashCode();
 
     /// <inheritdoc/>
     public override int GetHashCode() => HashCode.Combine(Timestamp, LogLevel, Payload, Senders);
 
+    // ┌────────────────────────────────────────────────────────────────────────────────┐
+    // │ Private Methods                                                                │
+    // └────────────────────────────────────────────────────────────────────────────────┘
     private string GetDebuggerDisplay() => $"LogLevel: {LogLevel}, Payload: {Payload}";
 }
