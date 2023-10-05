@@ -5,6 +5,8 @@
 // ----------------------------------------------------------------------------
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
@@ -16,8 +18,11 @@ namespace L0gg3r.Base;
 /// <summary>
 /// A pipeline for <see cref="LogMessage"/>s.
 /// </summary>
-public sealed class LogMessagePipeline : IAsyncDisposable
+public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>, IEnumerable<Predicate<LogMessage>>
 {
+    // ┌────────────────────────────────────────────────────────────────────────────────┐
+    // │ Private Fields                                                                 │
+    // └────────────────────────────────────────────────────────────────────────────────┘
     private Channel<LogMessage> channel = Channel.CreateUnbounded<LogMessage>();
 
     private Task task;
@@ -26,7 +31,11 @@ public sealed class LogMessagePipeline : IAsyncDisposable
 
     private ImmutableArray<Predicate<LogMessage>> filters = ImmutableArray<Predicate<LogMessage>>.Empty;
 
-    private ImmutableArray<Func<LogMessage, Task>> outputHandlers = ImmutableArray<Func<LogMessage, Task>>.Empty;
+    private ImmutableArray<ILogSink> logSinks = ImmutableArray<ILogSink>.Empty;
+
+    // ┌────────────────────────────────────────────────────────────────────────────────┐
+    // │ Public Constructors                                                            │
+    // └────────────────────────────────────────────────────────────────────────────────┘
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LogMessagePipeline"/> class.
@@ -35,6 +44,10 @@ public sealed class LogMessagePipeline : IAsyncDisposable
     {
         task = StartAsync();
     }
+
+    // ┌────────────────────────────────────────────────────────────────────────────────┐
+    // │ Public Properties                                                              │
+    // └────────────────────────────────────────────────────────────────────────────────┘
 
     /// <summary>
     /// Gets or sets a transform <see cref="Func{T, TResult}"/>.
@@ -74,45 +87,58 @@ public sealed class LogMessagePipeline : IAsyncDisposable
     /// </summary>
     /// <param name="logMessage">The <see cref="LogMessage"/> to post.</param>
     /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
-    public void Write(LogMessage logMessage) => channel.Writer.TryWrite(logMessage);
+    /// <returns>The <see cref="LogMessagePipeline"/> for chaining.</returns>
+    public LogMessagePipeline Write(LogMessage logMessage)
+    {
+        channel.Writer.TryWrite(logMessage);
+
+        return this;
+    }
 
     /// <summary>
     /// Attaches a <see cref="Func{T, TResult}"/> output handler to the pipeline.
     /// </summary>
     /// <remarks>
-    /// The <paramref name="outputHandler"/> is invoked for each <see cref="LogMessage"/> that passes the pipeline.
+    /// The <paramref name="logSink"/> is invoked for each <see cref="LogMessage"/> that passes the pipeline.
     /// </remarks>
-    /// <param name="outputHandler">The output handler to attach.</param>
-    /// <returns>An <see cref="IDisposable"/> that detaches the <paramref name="outputHandler"/> on dispose.</returns>
+    /// <param name="logSink">The output handler to attach.</param>
+    /// <returns>An <see cref="IDisposable"/> that detaches the <paramref name="logSink"/> on dispose.</returns>
     /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
-    public IDisposable AttachOutputHandler(Func<LogMessage, Task> outputHandler)
+    public IDisposable AddLogSink(ILogSink logSink)
     {
         if (IsDisposed)
         {
             throw new ObjectDisposedException(nameof(LogMessagePipeline));
         }
 
-        if (outputHandler is null)
+        if (logSink is null)
         {
-            throw new ArgumentNullException(nameof(outputHandler));
+            throw new ArgumentNullException(nameof(logSink));
         }
 
         Flush();
 
-        outputHandlers = outputHandlers.Add(outputHandler);
+        logSinks = logSinks.Add(logSink);
 
-        return new OutputHandlerDisposer(outputHandler, this);
+        return new Disposable(() => Remove(logSink));
     }
+
+    /// <summary>
+    /// Adds a new log sink to the pipeline.
+    /// </summary>
+    /// <param name="logSink">The log sink to add.</param>
+    /// <returns>An <see cref="IDisposable"/> object that can be used to remove the log sink from the pipeline.</returns>
+    public IDisposable Add(ILogSink logSink) => AddLogSink(logSink);
 
     /// <summary>
     /// Removes the <see cref="Func{T, TResult}"/> output handler from the pipeline.
     /// </summary>
-    /// <param name="outputHandler">The output handler to remove.</param>
-    public void RemoveOutputHandler(Func<LogMessage, Task> outputHandler)
+    /// <param name="logSink">The output handler to remove.</param>
+    public void Remove(ILogSink logSink)
     {
         Flush();
 
-        outputHandlers = outputHandlers.Remove(outputHandler);
+        logSinks = logSinks.Remove(logSink);
     }
 
     /// <summary>
@@ -137,8 +163,15 @@ public sealed class LogMessagePipeline : IAsyncDisposable
 
         filters = filters.Add(filter);
 
-        return new FilterDisposer(filter, this);
+        return new Disposable(() => RemoveFilter(filter));
     }
+
+    /// <summary>
+    /// Adds a filter to the log message pipeline.
+    /// </summary>
+    /// <param name="filter">The filter to add.</param>
+    /// <returns>An <see cref="IDisposable"/> object that can be used to remove the filter from the pipeline.</returns>
+    public IDisposable Add(Predicate<LogMessage> filter) => AddFilter(filter);
 
     /// <summary>
     /// Flushes the <see cref="LogMessagePipeline"/> asynchronously.
@@ -148,6 +181,8 @@ public sealed class LogMessagePipeline : IAsyncDisposable
     {
         await StopAsync().ConfigureAwait(false);
 
+        await Task.WhenAll(logSinks.Select(logSink => logSink.FlushAsync())).ConfigureAwait(false);
+
         task = StartAsync();
     }
 
@@ -155,6 +190,38 @@ public sealed class LogMessagePipeline : IAsyncDisposable
     /// Flushes the <see cref="LogMessagePipeline"/> synchronously.
     /// </summary>
     public void Flush() => FlushAsync().GetAwaiter().GetResult();
+
+    /// <inheritdoc/>
+    IEnumerator<ILogSink> IEnumerable<ILogSink>.GetEnumerator()
+    {
+        foreach (ILogSink logSink in logSinks)
+        {
+            yield return logSink;
+        }
+    }
+
+    /// <inheritdoc/>
+    IEnumerator<Predicate<LogMessage>> IEnumerable<Predicate<LogMessage>>.GetEnumerator()
+    {
+        foreach (Predicate<LogMessage> filter in filters)
+        {
+            yield return filter;
+        }
+    }
+
+    /// <inheritdoc/>
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        foreach (ILogSink logSink in logSinks)
+        {
+            yield return logSink;
+        }
+
+        foreach (Predicate<LogMessage> filter in filters)
+        {
+            yield return filter;
+        }
+    }
 
     /// <summary>
     /// Removes the filter <see cref="Predicate{T}"/> from the <see cref="LogMessagePipeline"/>.
@@ -187,7 +254,7 @@ public sealed class LogMessagePipeline : IAsyncDisposable
                     logMessage = Transform(logMessage);
                 }
 
-                await Task.WhenAll(outputHandlers.Select(outputHandler => outputHandler(logMessage))).ConfigureAwait(false);
+                await Task.WhenAll(logSinks.Select(logSink => logSink.ProcessAsync(logMessage))).ConfigureAwait(false);
             }
         }
         catch (ChannelClosedException)

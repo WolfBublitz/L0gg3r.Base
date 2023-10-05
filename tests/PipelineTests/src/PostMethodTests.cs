@@ -1,9 +1,26 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
 using L0gg3r.Base;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PipelineTests.PostMethodTests;
+
+internal sealed class LogSink : ILogSink
+{
+    public List<LogMessage> LogMessages { get; } = new();
+
+    public ValueTask DisposeAsync() => ValueTask.CompletedTask;
+
+    public Task FlushAsync() => Task.CompletedTask;
+
+    public Task ProcessAsync(in LogMessage logMessage)
+    {
+        LogMessages.Add(logMessage);
+
+        return Task.CompletedTask;
+    }
+}
 
 [TestClass]
 [TestCategory("PipelineTests")]
@@ -13,27 +30,23 @@ public class ThePostMethod
     public async Task ShouldPostLogMessageToPipeline()
     {
         // arrange
-        LogMessage? receivedLogMessage = null;
         LogMessage logMessage = new()
         {
             LogLevel = LogLevel.Info,
             Payload = "payload",
             Senders = new[] { "sender" }
         };
-        LogMessagePipeline pipeline = new();
-        pipeline.AttachOutputHandler(logMessage =>
+        LogSink logSink = new();
+        LogMessagePipeline pipeline = new()
         {
-            receivedLogMessage = logMessage;
-
-            return Task.CompletedTask;
-        });
+            logSink
+        };
 
         // act
         pipeline.Write(logMessage);
-        await pipeline.DisposeAsync().ConfigureAwait(false);
+        await pipeline.FlushAsync().ConfigureAwait(false);
 
         // assert
-        receivedLogMessage.Should().NotBeNull();
-        receivedLogMessage.Should().BeEquivalentTo(logMessage);
+        logSink.LogMessages[0].Should().BeEquivalentTo(logMessage);
     }
 }

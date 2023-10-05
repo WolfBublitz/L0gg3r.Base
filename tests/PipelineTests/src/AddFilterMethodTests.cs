@@ -7,6 +7,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PipelineTests.AddFilterMethodTests;
 
+internal sealed class LogSink : ILogSink
+{
+    public List<LogMessage> LogMessages { get; } = new();
+
+    public ValueTask DisposeAsync() => ValueTask.CompletedTask;
+
+    public Task FlushAsync() => Task.CompletedTask;
+
+    public Task ProcessAsync(in LogMessage logMessage)
+    {
+        LogMessages.Add(logMessage);
+
+        return Task.CompletedTask;
+    }
+}
+
 [TestClass]
 [TestCategory("PipelineTests")]
 public class TheAddFilterMethod
@@ -15,34 +31,28 @@ public class TheAddFilterMethod
     public async Task ShallAddAFilter()
     {
         // arrange
-        List<LogMessage> receivedLogMessages = new();
-        LogMessagePipeline logMessagePipeline = new();
-        TaskCompletionSource<LogMessage> taskCompletionSource = new();
-
-        logMessagePipeline.AttachOutputHandler(logMessage =>
+        LogSink logSink = new();
+        LogMessagePipeline logMessagePipeline = new()
         {
-            taskCompletionSource.SetResult(logMessage);
-
-            return Task.CompletedTask;
-        });
+            logSink,
+        };
 
         // act
         logMessagePipeline.Write(new LogMessage { Payload = 1 });
-        LogMessage logMessage1 = await taskCompletionSource.Task.ConfigureAwait(false);
+        await logMessagePipeline.FlushAsync().ConfigureAwait(false);
+        LogMessage logMessage1 = logSink.LogMessages[0];
 
         // assert
         logMessage1.Payload.Should().Be(1);
 
         // act
-        taskCompletionSource = new();
-
         using (IDisposable disposable = logMessagePipeline.AddFilter(logMessage => logMessage.Payload is int number && number == 2))
         {
             logMessagePipeline.Write(new LogMessage { Payload = 1 });
             logMessagePipeline.Write(new LogMessage { Payload = 2 });
         }
 
-        LogMessage logMessage2 = await taskCompletionSource.Task.ConfigureAwait(false);
+        LogMessage logMessage2 = logSink.LogMessages[1];
 
         // assert
         logMessage2.Payload.Should().Be(2, because: "the filter should have removed the log message with the payload 1");
@@ -52,35 +62,27 @@ public class TheAddFilterMethod
     public async Task ShallReturnADisposableThatRemovesTheFilter()
     {
         // arrange
-        List<LogMessage> receivedLogMessages = new();
-        LogMessagePipeline logMessagePipeline = new();
-        TaskCompletionSource<LogMessage> taskCompletionSource = new();
-
-        logMessagePipeline.AttachOutputHandler(logMessage =>
+        LogSink logSink = new();
+        LogMessagePipeline logMessagePipeline = new()
         {
-            taskCompletionSource.SetResult(logMessage);
-
-            return Task.CompletedTask;
-        });
+            logSink
+        };
 
         // act
         using (IDisposable disposable = logMessagePipeline.AddFilter(logMessage => logMessage.Payload is int number && number == 2))
         {
             logMessagePipeline.Write(new LogMessage { Payload = 1 });
             logMessagePipeline.Write(new LogMessage { Payload = 2 });
-
-            LogMessage logMessage1 = await taskCompletionSource.Task.ConfigureAwait(false);
+            await logMessagePipeline.FlushAsync().ConfigureAwait(false);
 
             // assert
-            logMessage1.Payload.Should().Be(2, because: "the filter should have removed the log message with the payload 1");
+            logSink.LogMessages[0].Payload.Should().Be(2, because: "the filter should have removed the log message with the payload 1");
         }
 
         // act
-        taskCompletionSource = new();
+        await logMessagePipeline.Write(new LogMessage { Payload = 1 }).FlushAsync().ConfigureAwait(false);
 
-        logMessagePipeline.Write(new LogMessage { Payload = 1 });
-
-        LogMessage logMessage2 = await taskCompletionSource.Task.ConfigureAwait(false);
+        LogMessage logMessage2 = logSink.LogMessages[1];
 
         // assert
         logMessage2.Payload.Should().Be(1, because: "the filter should have been removed");

@@ -6,6 +6,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PipelineTests.DisposeAsyncMethodTests;
 
+internal sealed class LogSink : ILogSink
+{
+    public List<LogMessage> LogMessages { get; } = new();
+
+    public ValueTask DisposeAsync() => ValueTask.CompletedTask;
+
+    public Task FlushAsync() => Task.CompletedTask;
+
+    public Task ProcessAsync(in LogMessage logMessage)
+    {
+        LogMessages.Add(logMessage);
+
+        return Task.CompletedTask;
+    }
+}
+
 [TestClass]
 [TestCategory("PipelineTests")]
 public class TheDisposeAsyncMethod
@@ -14,14 +30,11 @@ public class TheDisposeAsyncMethod
     public async Task ShallFlushThePipeline()
     {
         // arrange
-        List<LogMessage> logMessages = new();
-        LogMessagePipeline logMessagePipeline = new();
-        logMessagePipeline.AttachOutputHandler(logMessage =>
+        LogSink logSink = new();
+        LogMessagePipeline logMessagePipeline = new()
         {
-            logMessages.Add(logMessage);
-
-            return Task.CompletedTask;
-        });
+            logSink
+        };
 
         // act
         logMessagePipeline.Write(new LogMessage { LogLevel = LogLevel.Info, Payload = 1 });
@@ -30,9 +43,9 @@ public class TheDisposeAsyncMethod
         await logMessagePipeline.DisposeAsync().ConfigureAwait(false);
 
         // assert
-        logMessages.Count.Should().Be(3);
-        logMessages[0].Payload.Should().Be(1);
-        logMessages[1].Payload.Should().Be(2);
-        logMessages[2].Payload.Should().Be(3);
+        logSink.LogMessages.Count.Should().Be(3);
+        logSink.LogMessages[0].Payload.Should().Be(1);
+        logSink.LogMessages[1].Payload.Should().Be(2);
+        logSink.LogMessages[2].Payload.Should().Be(3);
     }
 }

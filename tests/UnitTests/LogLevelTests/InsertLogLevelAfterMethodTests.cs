@@ -15,6 +15,12 @@ public class TheInsertLogLevelAfterMethod
         LogLevel.ResetOrder();
     }
 
+    [TestCleanup]
+    public void TestCleanup()
+    {
+        LogLevel.ResetOrder();
+    }
+
     [TestMethod]
     public void ShallInsertANewLogLevelBeforeTheGivenLogLevel()
     {

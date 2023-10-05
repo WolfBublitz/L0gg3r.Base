@@ -8,6 +8,22 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PipelineTests.TransformPropertyTests;
 
+internal sealed class LogSink : ILogSink
+{
+    public List<LogMessage> LogMessages { get; } = new();
+
+    public ValueTask DisposeAsync() => ValueTask.CompletedTask;
+
+    public Task FlushAsync() => Task.CompletedTask;
+
+    public Task ProcessAsync(in LogMessage logMessage)
+    {
+        LogMessages.Add(logMessage);
+
+        return Task.CompletedTask;
+    }
+}
+
 [TestClass]
 [TestCategory("PipelineTests")]
 public class TheTransformProperty
@@ -16,7 +32,7 @@ public class TheTransformProperty
     public async Task ShallEnableATransformation()
     {
         // arrange
-        List<LogMessage> receivedLogMessages = new();
+        LogSink logSink = new();
         LogMessagePipeline logMessagePipeline = new()
         {
             Transform = logMessage =>
@@ -29,19 +45,13 @@ public class TheTransformProperty
                 };
             },
         };
-        logMessagePipeline.AttachOutputHandler(logMessage =>
-        {
-            receivedLogMessages.Add(logMessage);
-
-            return Task.CompletedTask;
-        });
+        logMessagePipeline.AddLogSink(logSink);
 
         // act
         logMessagePipeline.Write(new LogMessage { LogLevel = LogLevel.Info });
-        await logMessagePipeline.DisposeAsync().ConfigureAwait(false);
+        await logMessagePipeline.FlushAsync().ConfigureAwait(false);
 
         // assert
-        receivedLogMessages.Should().HaveCount(1);
-        receivedLogMessages.First().Payload.Should().Be("transformed payload");
+        logSink.LogMessages.First().Payload.Should().Be("transformed payload");
     }
 }
