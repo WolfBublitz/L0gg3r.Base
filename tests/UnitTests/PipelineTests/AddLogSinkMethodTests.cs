@@ -20,6 +20,20 @@ internal class LogSink : ILogSink
 public class TheAddLogSinkMethod
 {
     [TestMethod]
+    public void ShallAddTheLogSink()
+    {
+        // arrange
+        LogSink logSink = new();
+        LogMessagePipeline logMessagePipeline = new();
+
+        // act
+        logMessagePipeline.AddLogSink(logSink);
+
+        // assert
+        logMessagePipeline.LogSinks.Should().Contain(logSink);
+    }
+
+    [TestMethod]
     public void ShallThrowArgumentNullException()
     {
         // arrange

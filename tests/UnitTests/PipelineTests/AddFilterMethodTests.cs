@@ -12,6 +12,20 @@ namespace UnitTests.PipelineTests.AddFilterMethodTests;
 public class TheAddFilterMethod
 {
     [TestMethod]
+    public void ShallAddTheFilter()
+    {
+        // arrange
+        LogMessagePipeline logMessagePipeline = new();
+        static bool filter(LogMessage logMessage) => true;
+
+        // act
+        logMessagePipeline.AddFilter(filter);
+
+        // assert
+        logMessagePipeline.Filters.Should().Contain(filter);
+    }
+
+    [TestMethod]
     public void ShallThrowArgumentNullException()
     {
         // arrange

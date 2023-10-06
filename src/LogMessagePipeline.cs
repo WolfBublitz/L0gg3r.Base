@@ -72,6 +72,16 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     /// </summary>
     public bool IsDisposed { get; private set; }
 
+    /// <summary>
+    /// Gets the collection of <see cref="ILogSink"/>s that are registered with the pipeline.
+    /// </summary>
+    public IReadOnlyCollection<ILogSink> LogSinks => logSinks;
+
+    /// <summary>
+    /// Gets the collection of filters that are registered with the pipeline.
+    /// </summary>
+    public IReadOnlyCollection<Predicate<LogMessage>> Filters => filters;
+
     // ┌────────────────────────────────────────────────────────────────────────────────┐
     // │ Public Methods                                                                 │
     // └────────────────────────────────────────────────────────────────────────────────┘
@@ -124,7 +134,7 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
 
         logSinks = logSinks.Add(logSink);
 
-        return new Disposable(() => Remove(logSink));
+        return new Disposable(() => RemoveLogSink(logSink));
     }
 
     /// <summary>
@@ -138,7 +148,7 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     /// Removes the <see cref="Func{T, TResult}"/> output handler from the pipeline.
     /// </summary>
     /// <param name="logSink">The output handler to remove.</param>
-    public void Remove(ILogSink logSink)
+    public void RemoveLogSink(ILogSink logSink)
     {
         Flush();
 
