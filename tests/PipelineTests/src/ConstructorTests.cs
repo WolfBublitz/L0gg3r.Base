@@ -21,17 +21,4 @@ public class TheConstructor
         // assert
         transform.Should().BeNull();
     }
-
-    [TestMethod]
-    public void ShallCreateANotDi()
-    {
-        // arrange
-        LogMessagePipeline logMessagePipeline = new();
-
-        // act
-        Func<LogMessage, LogMessage>? transform = logMessagePipeline.Transform;
-
-        // assert
-        transform.Should().BeNull();
-    }
 }
