@@ -72,6 +72,10 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     /// </summary>
     public bool IsDisposed { get; private set; }
 
+    // ┌────────────────────────────────────────────────────────────────────────────────┐
+    // │ Public Methods                                                                 │
+    // └────────────────────────────────────────────────────────────────────────────────┘
+
     /// <inheritdoc/>
     public async ValueTask DisposeAsync()
     {
