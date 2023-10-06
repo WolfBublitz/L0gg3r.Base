@@ -1,49 +1,24 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
 using L0gg3r.Base;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace PipelineTests.AttachOutputHandlerMethodTests;
+namespace UnitTests.PipelineTests.AddLogSinkMethodTests;
 
-internal sealed class LogSink : ILogSink
+internal class LogSink : ILogSink
 {
-    public List<LogMessage> LogMessages { get; } = new();
-
     public ValueTask DisposeAsync() => ValueTask.CompletedTask;
-
     public Task FlushAsync() => Task.CompletedTask;
 
-    public Task ProcessAsync(in LogMessage logMessage)
-    {
-        LogMessages.Add(logMessage);
-
-        return Task.CompletedTask;
-    }
+    public Task ProcessAsync(in LogMessage logMessage) => Task.CompletedTask;
 }
 
 [TestClass]
+[TestCategory("UnitTests")]
 [TestCategory("PipelineTests")]
-public class TheAddMethod
+public class TheAddLogSinkMethod
 {
-    [TestMethod]
-    public async Task ShallAddALogSink()
-    {
-        // arrange
-        LogSink logSink = new();
-        LogMessagePipeline logMessagePipeline = new();
-
-        // act
-        logMessagePipeline.AddLogSink(logSink);
-        logMessagePipeline.Write(new LogMessage { LogLevel = LogLevel.Info });
-        await logMessagePipeline.FlushAsync().ConfigureAwait(false);
-
-        // assert
-        logSink.LogMessages.Should().HaveCount(1);
-        logSink.LogMessages[0].LogLevel.Should().Be(LogLevel.Info);
-    }
-
     [TestMethod]
     public void ShallThrowArgumentNullException()
     {

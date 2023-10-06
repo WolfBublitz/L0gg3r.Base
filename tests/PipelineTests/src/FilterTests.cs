@@ -25,10 +25,10 @@ internal sealed class LogSink : ILogSink
 
 [TestClass]
 [TestCategory("PipelineTests")]
-public class TheAddFilterMethod
+public class ThePipeline
 {
     [TestMethod]
-    public async Task ShallAddAFilter()
+    public async Task ShallApplyAFilterToEachLogMessage()
     {
         // arrange
         LogSink logSink = new();
@@ -86,32 +86,5 @@ public class TheAddFilterMethod
 
         // assert
         logMessage2.Payload.Should().Be(1, because: "the filter should have been removed");
-    }
-
-    [TestMethod]
-    public void ShallThrowArgumentNullException()
-    {
-        // arrange
-        LogMessagePipeline logMessagePipeline = new();
-
-        // act
-        Action action = () => logMessagePipeline.AddFilter(null!);
-
-        // assert
-        action.Should().Throw<ArgumentNullException>();
-    }
-
-    [TestMethod]
-    public async Task ShallThrowObjectDisposedException()
-    {
-        // arrange
-        LogMessagePipeline logMessagePipeline = new();
-        await logMessagePipeline.DisposeAsync().ConfigureAwait(false);
-
-        // act
-        Action action = () => logMessagePipeline.AddFilter(logMessage => true);
-
-        // assert
-        action.Should().Throw<ObjectDisposedException>();
     }
 }
