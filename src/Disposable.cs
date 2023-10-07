@@ -5,16 +5,20 @@
 // ----------------------------------------------------------------------------
 
 using System;
+using System.Diagnostics;
 
 /// <summary>
 /// Represents a disposable object that executes a specified action when disposed.
 /// </summary>
+[DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
 internal class Disposable : IDisposable
 {
     // ┌────────────────────────────────────────────────────────────────────────────────┐
     // │ Private Fields                                                                 │
     // └────────────────────────────────────────────────────────────────────────────────┘
     private readonly Action action;
+
+    private bool isDiposed;
 
     // ┌────────────────────────────────────────────────────────────────────────────────┐
     // │ Public Constructors                                                            │
@@ -34,5 +38,15 @@ internal class Disposable : IDisposable
     // └────────────────────────────────────────────────────────────────────────────────┘
 
     /// <inheritdoc/>
-    public void Dispose() => action();
+    public void Dispose()
+    {
+        isDiposed = true;
+
+        action();
+    }
+
+    // ┌────────────────────────────────────────────────────────────────────────────────┐
+    // │ Private Methods                                                                │
+    // └────────────────────────────────────────────────────────────────────────────────┘
+    private string GetDebuggerDisplay() => $"Is disposed: {isDiposed}";
 }
