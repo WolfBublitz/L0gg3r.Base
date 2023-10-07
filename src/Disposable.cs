@@ -38,8 +38,11 @@ internal class Disposable : IDisposable
     // └────────────────────────────────────────────────────────────────────────────────┘
 
     /// <inheritdoc/>
+    /// <exception cref="ObjectDisposedException">Thrown when the object is already disposed.</exception>
     public void Dispose()
     {
+        ObjectDisposedException.ThrowIf(isDiposed, this);
+
         isDiposed = true;
 
         action();
