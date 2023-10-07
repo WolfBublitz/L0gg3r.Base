@@ -87,8 +87,11 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     // └────────────────────────────────────────────────────────────────────────────────┘
 
     /// <inheritdoc/>
+    /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
     public async ValueTask DisposeAsync()
     {
+        ObjectDisposedException.ThrowIf(IsDisposed, this);
+
         IsDisposed = true;
 
         channel.Writer.Complete();
@@ -104,6 +107,8 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     /// <returns>The <see cref="LogMessagePipeline"/> for chaining.</returns>
     public LogMessagePipeline Write(LogMessage logMessage)
     {
+        ObjectDisposedException.ThrowIf(IsDisposed, this);
+
         channel.Writer.TryWrite(logMessage);
 
         return this;
@@ -120,10 +125,7 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
     public IDisposable AddLogSink(ILogSink logSink)
     {
-        if (IsDisposed)
-        {
-            throw new ObjectDisposedException(nameof(LogMessagePipeline));
-        }
+        ObjectDisposedException.ThrowIf(IsDisposed, this);
 
         if (logSink is null)
         {
@@ -142,14 +144,23 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     /// </summary>
     /// <param name="logSink">The log sink to add.</param>
     /// <returns>An <see cref="IDisposable"/> object that can be used to remove the log sink from the pipeline.</returns>
-    public IDisposable Add(ILogSink logSink) => AddLogSink(logSink);
+    /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
+    public IDisposable Add(ILogSink logSink)
+    {
+        ObjectDisposedException.ThrowIf(IsDisposed, this);
+
+        return AddLogSink(logSink);
+    }
 
     /// <summary>
     /// Removes the <see cref="Func{T, TResult}"/> output handler from the pipeline.
     /// </summary>
     /// <param name="logSink">The output handler to remove.</param>
+    /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
     public void RemoveLogSink(ILogSink logSink)
     {
+        ObjectDisposedException.ThrowIf(IsDisposed, this);
+
         Flush();
 
         logSinks = logSinks.Remove(logSink);
@@ -163,10 +174,7 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
     public IDisposable AddFilter(Predicate<LogMessage> filter)
     {
-        if (IsDisposed)
-        {
-            throw new ObjectDisposedException(nameof(LogMessagePipeline));
-        }
+        ObjectDisposedException.ThrowIf(IsDisposed, this);
 
         if (filter is null)
         {
@@ -181,18 +189,36 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     }
 
     /// <summary>
+    /// Removes the filter <see cref="Predicate{T}"/> from the <see cref="LogMessagePipeline"/>.
+    /// </summary>
+    /// <param name="filter">The filter <see cref="Predicate{T}"/> to remove.</param>
+    /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
+    public void RemoveFilter(Predicate<LogMessage> filter)
+    {
+        ObjectDisposedException.ThrowIf(IsDisposed, this);
+
+        Flush();
+
+        filters = filters.Remove(filter);
+    }
+
+    /// <summary>
     /// Adds a filter to the log message pipeline.
     /// </summary>
     /// <param name="filter">The filter to add.</param>
     /// <returns>An <see cref="IDisposable"/> object that can be used to remove the filter from the pipeline.</returns>
+    /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
     public IDisposable Add(Predicate<LogMessage> filter) => AddFilter(filter);
 
     /// <summary>
     /// Flushes the <see cref="LogMessagePipeline"/> asynchronously.
     /// </summary>
     /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
     public async Task FlushAsync()
     {
+        ObjectDisposedException.ThrowIf(IsDisposed, this);
+
         await StopAsync().ConfigureAwait(false);
 
         await Task.WhenAll(logSinks.Select(logSink => logSink.FlushAsync())).ConfigureAwait(false);
@@ -203,11 +229,15 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     /// <summary>
     /// Flushes the <see cref="LogMessagePipeline"/> synchronously.
     /// </summary>
+    /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
     public void Flush() => FlushAsync().GetAwaiter().GetResult();
 
     /// <inheritdoc/>
+    /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
     IEnumerator<ILogSink> IEnumerable<ILogSink>.GetEnumerator()
     {
+        ObjectDisposedException.ThrowIf(IsDisposed, this);
+
         foreach (ILogSink logSink in logSinks)
         {
             yield return logSink;
@@ -215,8 +245,11 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     }
 
     /// <inheritdoc/>
+    /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
     IEnumerator<Predicate<LogMessage>> IEnumerable<Predicate<LogMessage>>.GetEnumerator()
     {
+        ObjectDisposedException.ThrowIf(IsDisposed, this);
+
         foreach (Predicate<LogMessage> filter in filters)
         {
             yield return filter;
@@ -224,8 +257,11 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     }
 
     /// <inheritdoc/>
+    /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
     IEnumerator IEnumerable.GetEnumerator()
     {
+        ObjectDisposedException.ThrowIf(IsDisposed, this);
+
         foreach (ILogSink logSink in logSinks)
         {
             yield return logSink;
@@ -237,17 +273,9 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
         }
     }
 
-    /// <summary>
-    /// Removes the filter <see cref="Predicate{T}"/> from the <see cref="LogMessagePipeline"/>.
-    /// </summary>
-    /// <param name="filter">The filter <see cref="Predicate{T}"/> to remove.</param>
-    internal void RemoveFilter(Predicate<LogMessage> filter)
-    {
-        Flush();
-
-        filters = filters.Remove(filter);
-    }
-
+    // ┌────────────────────────────────────────────────────────────────────────────────┐
+    // │ Private Methods                                                                │
+    // └────────────────────────────────────────────────────────────────────────────────┘
     private async Task StartAsync()
     {
         ChannelReader<LogMessage> reader = channel.Reader;
