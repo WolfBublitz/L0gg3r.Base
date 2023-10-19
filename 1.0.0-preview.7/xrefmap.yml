@@ -1,0 +1,609 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: L0gg3r.Base
+  name: L0gg3r.Base
+  href: api/L0gg3r.Base.html
+  commentId: N:L0gg3r.Base
+  fullName: L0gg3r.Base
+  nameWithType: L0gg3r.Base
+- uid: L0gg3r.Base.ILogSink
+  name: ILogSink
+  href: api/L0gg3r.Base.ILogSink.html
+  commentId: T:L0gg3r.Base.ILogSink
+  fullName: L0gg3r.Base.ILogSink
+  nameWithType: ILogSink
+- uid: L0gg3r.Base.ILogSink.FlushAsync
+  name: FlushAsync()
+  href: api/L0gg3r.Base.ILogSink.html#L0gg3r_Base_ILogSink_FlushAsync
+  commentId: M:L0gg3r.Base.ILogSink.FlushAsync
+  fullName: L0gg3r.Base.ILogSink.FlushAsync()
+  nameWithType: ILogSink.FlushAsync()
+- uid: L0gg3r.Base.ILogSink.FlushAsync*
+  name: FlushAsync
+  href: api/L0gg3r.Base.ILogSink.html#L0gg3r_Base_ILogSink_FlushAsync_
+  commentId: Overload:L0gg3r.Base.ILogSink.FlushAsync
+  isSpec: "True"
+  fullName: L0gg3r.Base.ILogSink.FlushAsync
+  nameWithType: ILogSink.FlushAsync
+- uid: L0gg3r.Base.ILogSink.ProcessAsync(L0gg3r.Base.LogMessage@)
+  name: ProcessAsync(in LogMessage)
+  href: api/L0gg3r.Base.ILogSink.html#L0gg3r_Base_ILogSink_ProcessAsync_L0gg3r_Base_LogMessage__
+  commentId: M:L0gg3r.Base.ILogSink.ProcessAsync(L0gg3r.Base.LogMessage@)
+  name.vb: ProcessAsync(LogMessage)
+  fullName: L0gg3r.Base.ILogSink.ProcessAsync(in L0gg3r.Base.LogMessage)
+  fullName.vb: L0gg3r.Base.ILogSink.ProcessAsync(L0gg3r.Base.LogMessage)
+  nameWithType: ILogSink.ProcessAsync(in LogMessage)
+  nameWithType.vb: ILogSink.ProcessAsync(LogMessage)
+- uid: L0gg3r.Base.ILogSink.ProcessAsync*
+  name: ProcessAsync
+  href: api/L0gg3r.Base.ILogSink.html#L0gg3r_Base_ILogSink_ProcessAsync_
+  commentId: Overload:L0gg3r.Base.ILogSink.ProcessAsync
+  isSpec: "True"
+  fullName: L0gg3r.Base.ILogSink.ProcessAsync
+  nameWithType: ILogSink.ProcessAsync
+- uid: L0gg3r.Base.LogLevel
+  name: LogLevel
+  href: api/L0gg3r.Base.LogLevel.html
+  commentId: T:L0gg3r.Base.LogLevel
+  fullName: L0gg3r.Base.LogLevel
+  nameWithType: LogLevel
+- uid: L0gg3r.Base.LogLevel.CompareTo(L0gg3r.Base.LogLevel)
+  name: CompareTo(LogLevel)
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_CompareTo_L0gg3r_Base_LogLevel_
+  commentId: M:L0gg3r.Base.LogLevel.CompareTo(L0gg3r.Base.LogLevel)
+  fullName: L0gg3r.Base.LogLevel.CompareTo(L0gg3r.Base.LogLevel)
+  nameWithType: LogLevel.CompareTo(LogLevel)
+- uid: L0gg3r.Base.LogLevel.CompareTo(System.Object)
+  name: CompareTo(object?)
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_CompareTo_System_Object_
+  commentId: M:L0gg3r.Base.LogLevel.CompareTo(System.Object)
+  name.vb: CompareTo(Object)
+  fullName: L0gg3r.Base.LogLevel.CompareTo(object?)
+  fullName.vb: L0gg3r.Base.LogLevel.CompareTo(Object)
+  nameWithType: LogLevel.CompareTo(object?)
+  nameWithType.vb: LogLevel.CompareTo(Object)
+- uid: L0gg3r.Base.LogLevel.CompareTo*
+  name: CompareTo
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_CompareTo_
+  commentId: Overload:L0gg3r.Base.LogLevel.CompareTo
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogLevel.CompareTo
+  nameWithType: LogLevel.CompareTo
+- uid: L0gg3r.Base.LogLevel.Description
+  name: Description
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_Description
+  commentId: P:L0gg3r.Base.LogLevel.Description
+  fullName: L0gg3r.Base.LogLevel.Description
+  nameWithType: LogLevel.Description
+- uid: L0gg3r.Base.LogLevel.Description*
+  name: Description
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_Description_
+  commentId: Overload:L0gg3r.Base.LogLevel.Description
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogLevel.Description
+  nameWithType: LogLevel.Description
+- uid: L0gg3r.Base.LogLevel.Error
+  name: Error
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_Error
+  commentId: P:L0gg3r.Base.LogLevel.Error
+  fullName: L0gg3r.Base.LogLevel.Error
+  nameWithType: LogLevel.Error
+- uid: L0gg3r.Base.LogLevel.Error*
+  name: Error
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_Error_
+  commentId: Overload:L0gg3r.Base.LogLevel.Error
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogLevel.Error
+  nameWithType: LogLevel.Error
+- uid: L0gg3r.Base.LogLevel.GetHashCode
+  name: GetHashCode()
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_GetHashCode
+  commentId: M:L0gg3r.Base.LogLevel.GetHashCode
+  fullName: L0gg3r.Base.LogLevel.GetHashCode()
+  nameWithType: LogLevel.GetHashCode()
+- uid: L0gg3r.Base.LogLevel.GetHashCode*
+  name: GetHashCode
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_GetHashCode_
+  commentId: Overload:L0gg3r.Base.LogLevel.GetHashCode
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogLevel.GetHashCode
+  nameWithType: LogLevel.GetHashCode
+- uid: L0gg3r.Base.LogLevel.Info
+  name: Info
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_Info
+  commentId: P:L0gg3r.Base.LogLevel.Info
+  fullName: L0gg3r.Base.LogLevel.Info
+  nameWithType: LogLevel.Info
+- uid: L0gg3r.Base.LogLevel.Info*
+  name: Info
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_Info_
+  commentId: Overload:L0gg3r.Base.LogLevel.Info
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogLevel.Info
+  nameWithType: LogLevel.Info
+- uid: L0gg3r.Base.LogLevel.InsertLogLevelAfter(L0gg3r.Base.LogLevel,System.String,System.String)
+  name: InsertLogLevelAfter(LogLevel, string, string)
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_InsertLogLevelAfter_L0gg3r_Base_LogLevel_System_String_System_String_
+  commentId: M:L0gg3r.Base.LogLevel.InsertLogLevelAfter(L0gg3r.Base.LogLevel,System.String,System.String)
+  name.vb: InsertLogLevelAfter(LogLevel, String, String)
+  fullName: L0gg3r.Base.LogLevel.InsertLogLevelAfter(L0gg3r.Base.LogLevel, string, string)
+  fullName.vb: L0gg3r.Base.LogLevel.InsertLogLevelAfter(L0gg3r.Base.LogLevel, String, String)
+  nameWithType: LogLevel.InsertLogLevelAfter(LogLevel, string, string)
+  nameWithType.vb: LogLevel.InsertLogLevelAfter(LogLevel, String, String)
+- uid: L0gg3r.Base.LogLevel.InsertLogLevelAfter*
+  name: InsertLogLevelAfter
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_InsertLogLevelAfter_
+  commentId: Overload:L0gg3r.Base.LogLevel.InsertLogLevelAfter
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogLevel.InsertLogLevelAfter
+  nameWithType: LogLevel.InsertLogLevelAfter
+- uid: L0gg3r.Base.LogLevel.InsertLogLevelBefore(L0gg3r.Base.LogLevel,System.String,System.String)
+  name: InsertLogLevelBefore(LogLevel, string, string)
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_InsertLogLevelBefore_L0gg3r_Base_LogLevel_System_String_System_String_
+  commentId: M:L0gg3r.Base.LogLevel.InsertLogLevelBefore(L0gg3r.Base.LogLevel,System.String,System.String)
+  name.vb: InsertLogLevelBefore(LogLevel, String, String)
+  fullName: L0gg3r.Base.LogLevel.InsertLogLevelBefore(L0gg3r.Base.LogLevel, string, string)
+  fullName.vb: L0gg3r.Base.LogLevel.InsertLogLevelBefore(L0gg3r.Base.LogLevel, String, String)
+  nameWithType: LogLevel.InsertLogLevelBefore(LogLevel, string, string)
+  nameWithType.vb: LogLevel.InsertLogLevelBefore(LogLevel, String, String)
+- uid: L0gg3r.Base.LogLevel.InsertLogLevelBefore*
+  name: InsertLogLevelBefore
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_InsertLogLevelBefore_
+  commentId: Overload:L0gg3r.Base.LogLevel.InsertLogLevelBefore
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogLevel.InsertLogLevelBefore
+  nameWithType: LogLevel.InsertLogLevelBefore
+- uid: L0gg3r.Base.LogLevel.Name
+  name: Name
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_Name
+  commentId: P:L0gg3r.Base.LogLevel.Name
+  fullName: L0gg3r.Base.LogLevel.Name
+  nameWithType: LogLevel.Name
+- uid: L0gg3r.Base.LogLevel.Name*
+  name: Name
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_Name_
+  commentId: Overload:L0gg3r.Base.LogLevel.Name
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogLevel.Name
+  nameWithType: LogLevel.Name
+- uid: L0gg3r.Base.LogLevel.Order
+  name: Order
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_Order
+  commentId: P:L0gg3r.Base.LogLevel.Order
+  fullName: L0gg3r.Base.LogLevel.Order
+  nameWithType: LogLevel.Order
+- uid: L0gg3r.Base.LogLevel.Order*
+  name: Order
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_Order_
+  commentId: Overload:L0gg3r.Base.LogLevel.Order
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogLevel.Order
+  nameWithType: LogLevel.Order
+- uid: L0gg3r.Base.LogLevel.ResetOrder
+  name: ResetOrder()
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_ResetOrder
+  commentId: M:L0gg3r.Base.LogLevel.ResetOrder
+  fullName: L0gg3r.Base.LogLevel.ResetOrder()
+  nameWithType: LogLevel.ResetOrder()
+- uid: L0gg3r.Base.LogLevel.ResetOrder*
+  name: ResetOrder
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_ResetOrder_
+  commentId: Overload:L0gg3r.Base.LogLevel.ResetOrder
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogLevel.ResetOrder
+  nameWithType: LogLevel.ResetOrder
+- uid: L0gg3r.Base.LogLevel.ToString
+  name: ToString()
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_ToString
+  commentId: M:L0gg3r.Base.LogLevel.ToString
+  fullName: L0gg3r.Base.LogLevel.ToString()
+  nameWithType: LogLevel.ToString()
+- uid: L0gg3r.Base.LogLevel.ToString*
+  name: ToString
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_ToString_
+  commentId: Overload:L0gg3r.Base.LogLevel.ToString
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogLevel.ToString
+  nameWithType: LogLevel.ToString
+- uid: L0gg3r.Base.LogLevel.Warning
+  name: Warning
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_Warning
+  commentId: P:L0gg3r.Base.LogLevel.Warning
+  fullName: L0gg3r.Base.LogLevel.Warning
+  nameWithType: LogLevel.Warning
+- uid: L0gg3r.Base.LogLevel.Warning*
+  name: Warning
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_Warning_
+  commentId: Overload:L0gg3r.Base.LogLevel.Warning
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogLevel.Warning
+  nameWithType: LogLevel.Warning
+- uid: L0gg3r.Base.LogLevel.op_GreaterThan(L0gg3r.Base.LogLevel,L0gg3r.Base.LogLevel)
+  name: operator >(LogLevel, LogLevel)
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_op_GreaterThan_L0gg3r_Base_LogLevel_L0gg3r_Base_LogLevel_
+  commentId: M:L0gg3r.Base.LogLevel.op_GreaterThan(L0gg3r.Base.LogLevel,L0gg3r.Base.LogLevel)
+  name.vb: '>(LogLevel, LogLevel)'
+  fullName: L0gg3r.Base.LogLevel.operator >(L0gg3r.Base.LogLevel, L0gg3r.Base.LogLevel)
+  fullName.vb: L0gg3r.Base.LogLevel.>(L0gg3r.Base.LogLevel, L0gg3r.Base.LogLevel)
+  nameWithType: LogLevel.operator >(LogLevel, LogLevel)
+  nameWithType.vb: LogLevel.>(LogLevel, LogLevel)
+- uid: L0gg3r.Base.LogLevel.op_GreaterThan*
+  name: operator >
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_op_GreaterThan_
+  commentId: Overload:L0gg3r.Base.LogLevel.op_GreaterThan
+  isSpec: "True"
+  name.vb: '>'
+  fullName: L0gg3r.Base.LogLevel.operator >
+  fullName.vb: L0gg3r.Base.LogLevel.>
+  nameWithType: LogLevel.operator >
+  nameWithType.vb: LogLevel.>
+- uid: L0gg3r.Base.LogLevel.op_GreaterThanOrEqual(L0gg3r.Base.LogLevel,L0gg3r.Base.LogLevel)
+  name: operator >=(LogLevel, LogLevel)
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_op_GreaterThanOrEqual_L0gg3r_Base_LogLevel_L0gg3r_Base_LogLevel_
+  commentId: M:L0gg3r.Base.LogLevel.op_GreaterThanOrEqual(L0gg3r.Base.LogLevel,L0gg3r.Base.LogLevel)
+  name.vb: '>=(LogLevel, LogLevel)'
+  fullName: L0gg3r.Base.LogLevel.operator >=(L0gg3r.Base.LogLevel, L0gg3r.Base.LogLevel)
+  fullName.vb: L0gg3r.Base.LogLevel.>=(L0gg3r.Base.LogLevel, L0gg3r.Base.LogLevel)
+  nameWithType: LogLevel.operator >=(LogLevel, LogLevel)
+  nameWithType.vb: LogLevel.>=(LogLevel, LogLevel)
+- uid: L0gg3r.Base.LogLevel.op_GreaterThanOrEqual*
+  name: operator >=
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_op_GreaterThanOrEqual_
+  commentId: Overload:L0gg3r.Base.LogLevel.op_GreaterThanOrEqual
+  isSpec: "True"
+  name.vb: '>='
+  fullName: L0gg3r.Base.LogLevel.operator >=
+  fullName.vb: L0gg3r.Base.LogLevel.>=
+  nameWithType: LogLevel.operator >=
+  nameWithType.vb: LogLevel.>=
+- uid: L0gg3r.Base.LogLevel.op_LessThan(L0gg3r.Base.LogLevel,L0gg3r.Base.LogLevel)
+  name: operator <(LogLevel, LogLevel)
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_op_LessThan_L0gg3r_Base_LogLevel_L0gg3r_Base_LogLevel_
+  commentId: M:L0gg3r.Base.LogLevel.op_LessThan(L0gg3r.Base.LogLevel,L0gg3r.Base.LogLevel)
+  name.vb: <(LogLevel, LogLevel)
+  fullName: L0gg3r.Base.LogLevel.operator <(L0gg3r.Base.LogLevel, L0gg3r.Base.LogLevel)
+  fullName.vb: L0gg3r.Base.LogLevel.<(L0gg3r.Base.LogLevel, L0gg3r.Base.LogLevel)
+  nameWithType: LogLevel.operator <(LogLevel, LogLevel)
+  nameWithType.vb: LogLevel.<(LogLevel, LogLevel)
+- uid: L0gg3r.Base.LogLevel.op_LessThan*
+  name: operator <
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_op_LessThan_
+  commentId: Overload:L0gg3r.Base.LogLevel.op_LessThan
+  isSpec: "True"
+  name.vb: <
+  fullName: L0gg3r.Base.LogLevel.operator <
+  fullName.vb: L0gg3r.Base.LogLevel.<
+  nameWithType: LogLevel.operator <
+  nameWithType.vb: LogLevel.<
+- uid: L0gg3r.Base.LogLevel.op_LessThanOrEqual(L0gg3r.Base.LogLevel,L0gg3r.Base.LogLevel)
+  name: operator <=(LogLevel, LogLevel)
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_op_LessThanOrEqual_L0gg3r_Base_LogLevel_L0gg3r_Base_LogLevel_
+  commentId: M:L0gg3r.Base.LogLevel.op_LessThanOrEqual(L0gg3r.Base.LogLevel,L0gg3r.Base.LogLevel)
+  name.vb: <=(LogLevel, LogLevel)
+  fullName: L0gg3r.Base.LogLevel.operator <=(L0gg3r.Base.LogLevel, L0gg3r.Base.LogLevel)
+  fullName.vb: L0gg3r.Base.LogLevel.<=(L0gg3r.Base.LogLevel, L0gg3r.Base.LogLevel)
+  nameWithType: LogLevel.operator <=(LogLevel, LogLevel)
+  nameWithType.vb: LogLevel.<=(LogLevel, LogLevel)
+- uid: L0gg3r.Base.LogLevel.op_LessThanOrEqual*
+  name: operator <=
+  href: api/L0gg3r.Base.LogLevel.html#L0gg3r_Base_LogLevel_op_LessThanOrEqual_
+  commentId: Overload:L0gg3r.Base.LogLevel.op_LessThanOrEqual
+  isSpec: "True"
+  name.vb: <=
+  fullName: L0gg3r.Base.LogLevel.operator <=
+  fullName.vb: L0gg3r.Base.LogLevel.<=
+  nameWithType: LogLevel.operator <=
+  nameWithType.vb: LogLevel.<=
+- uid: L0gg3r.Base.LogMessage
+  name: LogMessage
+  href: api/L0gg3r.Base.LogMessage.html
+  commentId: T:L0gg3r.Base.LogMessage
+  fullName: L0gg3r.Base.LogMessage
+  nameWithType: LogMessage
+- uid: L0gg3r.Base.LogMessage.#ctor
+  name: LogMessage()
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage__ctor
+  commentId: M:L0gg3r.Base.LogMessage.#ctor
+  name.vb: New()
+  fullName: L0gg3r.Base.LogMessage.LogMessage()
+  fullName.vb: L0gg3r.Base.LogMessage.New()
+  nameWithType: LogMessage.LogMessage()
+  nameWithType.vb: LogMessage.New()
+- uid: L0gg3r.Base.LogMessage.#ctor*
+  name: LogMessage
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage__ctor_
+  commentId: Overload:L0gg3r.Base.LogMessage.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: L0gg3r.Base.LogMessage.LogMessage
+  fullName.vb: L0gg3r.Base.LogMessage.New
+  nameWithType: LogMessage.LogMessage
+  nameWithType.vb: LogMessage.New
+- uid: L0gg3r.Base.LogMessage.Equals(L0gg3r.Base.LogMessage)
+  name: Equals(LogMessage)
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage_Equals_L0gg3r_Base_LogMessage_
+  commentId: M:L0gg3r.Base.LogMessage.Equals(L0gg3r.Base.LogMessage)
+  fullName: L0gg3r.Base.LogMessage.Equals(L0gg3r.Base.LogMessage)
+  nameWithType: LogMessage.Equals(LogMessage)
+- uid: L0gg3r.Base.LogMessage.Equals*
+  name: Equals
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage_Equals_
+  commentId: Overload:L0gg3r.Base.LogMessage.Equals
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessage.Equals
+  nameWithType: LogMessage.Equals
+- uid: L0gg3r.Base.LogMessage.GetHashCode
+  name: GetHashCode()
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage_GetHashCode
+  commentId: M:L0gg3r.Base.LogMessage.GetHashCode
+  fullName: L0gg3r.Base.LogMessage.GetHashCode()
+  nameWithType: LogMessage.GetHashCode()
+- uid: L0gg3r.Base.LogMessage.GetHashCode*
+  name: GetHashCode
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage_GetHashCode_
+  commentId: Overload:L0gg3r.Base.LogMessage.GetHashCode
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessage.GetHashCode
+  nameWithType: LogMessage.GetHashCode
+- uid: L0gg3r.Base.LogMessage.LogLevel
+  name: LogLevel
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage_LogLevel
+  commentId: P:L0gg3r.Base.LogMessage.LogLevel
+  fullName: L0gg3r.Base.LogMessage.LogLevel
+  nameWithType: LogMessage.LogLevel
+- uid: L0gg3r.Base.LogMessage.LogLevel*
+  name: LogLevel
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage_LogLevel_
+  commentId: Overload:L0gg3r.Base.LogMessage.LogLevel
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessage.LogLevel
+  nameWithType: LogMessage.LogLevel
+- uid: L0gg3r.Base.LogMessage.Payload
+  name: Payload
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage_Payload
+  commentId: P:L0gg3r.Base.LogMessage.Payload
+  fullName: L0gg3r.Base.LogMessage.Payload
+  nameWithType: LogMessage.Payload
+- uid: L0gg3r.Base.LogMessage.Payload*
+  name: Payload
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage_Payload_
+  commentId: Overload:L0gg3r.Base.LogMessage.Payload
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessage.Payload
+  nameWithType: LogMessage.Payload
+- uid: L0gg3r.Base.LogMessage.Senders
+  name: Senders
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage_Senders
+  commentId: P:L0gg3r.Base.LogMessage.Senders
+  fullName: L0gg3r.Base.LogMessage.Senders
+  nameWithType: LogMessage.Senders
+- uid: L0gg3r.Base.LogMessage.Senders*
+  name: Senders
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage_Senders_
+  commentId: Overload:L0gg3r.Base.LogMessage.Senders
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessage.Senders
+  nameWithType: LogMessage.Senders
+- uid: L0gg3r.Base.LogMessage.Timestamp
+  name: Timestamp
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage_Timestamp
+  commentId: P:L0gg3r.Base.LogMessage.Timestamp
+  fullName: L0gg3r.Base.LogMessage.Timestamp
+  nameWithType: LogMessage.Timestamp
+- uid: L0gg3r.Base.LogMessage.Timestamp*
+  name: Timestamp
+  href: api/L0gg3r.Base.LogMessage.html#L0gg3r_Base_LogMessage_Timestamp_
+  commentId: Overload:L0gg3r.Base.LogMessage.Timestamp
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessage.Timestamp
+  nameWithType: LogMessage.Timestamp
+- uid: L0gg3r.Base.LogMessagePipeline
+  name: LogMessagePipeline
+  href: api/L0gg3r.Base.LogMessagePipeline.html
+  commentId: T:L0gg3r.Base.LogMessagePipeline
+  fullName: L0gg3r.Base.LogMessagePipeline
+  nameWithType: LogMessagePipeline
+- uid: L0gg3r.Base.LogMessagePipeline.#ctor
+  name: LogMessagePipeline()
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline__ctor
+  commentId: M:L0gg3r.Base.LogMessagePipeline.#ctor
+  name.vb: New()
+  fullName: L0gg3r.Base.LogMessagePipeline.LogMessagePipeline()
+  fullName.vb: L0gg3r.Base.LogMessagePipeline.New()
+  nameWithType: LogMessagePipeline.LogMessagePipeline()
+  nameWithType.vb: LogMessagePipeline.New()
+- uid: L0gg3r.Base.LogMessagePipeline.#ctor*
+  name: LogMessagePipeline
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline__ctor_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: L0gg3r.Base.LogMessagePipeline.LogMessagePipeline
+  fullName.vb: L0gg3r.Base.LogMessagePipeline.New
+  nameWithType: LogMessagePipeline.LogMessagePipeline
+  nameWithType.vb: LogMessagePipeline.New
+- uid: L0gg3r.Base.LogMessagePipeline.Add(L0gg3r.Base.ILogSink)
+  name: Add(ILogSink)
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_Add_L0gg3r_Base_ILogSink_
+  commentId: M:L0gg3r.Base.LogMessagePipeline.Add(L0gg3r.Base.ILogSink)
+  fullName: L0gg3r.Base.LogMessagePipeline.Add(L0gg3r.Base.ILogSink)
+  nameWithType: LogMessagePipeline.Add(ILogSink)
+- uid: L0gg3r.Base.LogMessagePipeline.Add(System.Predicate{L0gg3r.Base.LogMessage})
+  name: Add(Predicate<LogMessage>)
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_Add_System_Predicate_L0gg3r_Base_LogMessage__
+  commentId: M:L0gg3r.Base.LogMessagePipeline.Add(System.Predicate{L0gg3r.Base.LogMessage})
+  name.vb: Add(Predicate(Of LogMessage))
+  fullName: L0gg3r.Base.LogMessagePipeline.Add(System.Predicate<L0gg3r.Base.LogMessage>)
+  fullName.vb: L0gg3r.Base.LogMessagePipeline.Add(System.Predicate(Of L0gg3r.Base.LogMessage))
+  nameWithType: LogMessagePipeline.Add(Predicate<LogMessage>)
+  nameWithType.vb: LogMessagePipeline.Add(Predicate(Of LogMessage))
+- uid: L0gg3r.Base.LogMessagePipeline.Add*
+  name: Add
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_Add_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.Add
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.Add
+  nameWithType: LogMessagePipeline.Add
+- uid: L0gg3r.Base.LogMessagePipeline.AddFilter(System.Predicate{L0gg3r.Base.LogMessage})
+  name: AddFilter(Predicate<LogMessage>)
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_AddFilter_System_Predicate_L0gg3r_Base_LogMessage__
+  commentId: M:L0gg3r.Base.LogMessagePipeline.AddFilter(System.Predicate{L0gg3r.Base.LogMessage})
+  name.vb: AddFilter(Predicate(Of LogMessage))
+  fullName: L0gg3r.Base.LogMessagePipeline.AddFilter(System.Predicate<L0gg3r.Base.LogMessage>)
+  fullName.vb: L0gg3r.Base.LogMessagePipeline.AddFilter(System.Predicate(Of L0gg3r.Base.LogMessage))
+  nameWithType: LogMessagePipeline.AddFilter(Predicate<LogMessage>)
+  nameWithType.vb: LogMessagePipeline.AddFilter(Predicate(Of LogMessage))
+- uid: L0gg3r.Base.LogMessagePipeline.AddFilter*
+  name: AddFilter
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_AddFilter_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.AddFilter
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.AddFilter
+  nameWithType: LogMessagePipeline.AddFilter
+- uid: L0gg3r.Base.LogMessagePipeline.AddLogSink(L0gg3r.Base.ILogSink)
+  name: AddLogSink(ILogSink)
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_AddLogSink_L0gg3r_Base_ILogSink_
+  commentId: M:L0gg3r.Base.LogMessagePipeline.AddLogSink(L0gg3r.Base.ILogSink)
+  fullName: L0gg3r.Base.LogMessagePipeline.AddLogSink(L0gg3r.Base.ILogSink)
+  nameWithType: LogMessagePipeline.AddLogSink(ILogSink)
+- uid: L0gg3r.Base.LogMessagePipeline.AddLogSink*
+  name: AddLogSink
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_AddLogSink_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.AddLogSink
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.AddLogSink
+  nameWithType: LogMessagePipeline.AddLogSink
+- uid: L0gg3r.Base.LogMessagePipeline.DisposeAsync
+  name: DisposeAsync()
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_DisposeAsync
+  commentId: M:L0gg3r.Base.LogMessagePipeline.DisposeAsync
+  fullName: L0gg3r.Base.LogMessagePipeline.DisposeAsync()
+  nameWithType: LogMessagePipeline.DisposeAsync()
+- uid: L0gg3r.Base.LogMessagePipeline.DisposeAsync*
+  name: DisposeAsync
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_DisposeAsync_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.DisposeAsync
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.DisposeAsync
+  nameWithType: LogMessagePipeline.DisposeAsync
+- uid: L0gg3r.Base.LogMessagePipeline.Filters
+  name: Filters
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_Filters
+  commentId: P:L0gg3r.Base.LogMessagePipeline.Filters
+  fullName: L0gg3r.Base.LogMessagePipeline.Filters
+  nameWithType: LogMessagePipeline.Filters
+- uid: L0gg3r.Base.LogMessagePipeline.Filters*
+  name: Filters
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_Filters_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.Filters
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.Filters
+  nameWithType: LogMessagePipeline.Filters
+- uid: L0gg3r.Base.LogMessagePipeline.Flush
+  name: Flush()
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_Flush
+  commentId: M:L0gg3r.Base.LogMessagePipeline.Flush
+  fullName: L0gg3r.Base.LogMessagePipeline.Flush()
+  nameWithType: LogMessagePipeline.Flush()
+- uid: L0gg3r.Base.LogMessagePipeline.Flush*
+  name: Flush
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_Flush_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.Flush
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.Flush
+  nameWithType: LogMessagePipeline.Flush
+- uid: L0gg3r.Base.LogMessagePipeline.FlushAsync
+  name: FlushAsync()
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_FlushAsync
+  commentId: M:L0gg3r.Base.LogMessagePipeline.FlushAsync
+  fullName: L0gg3r.Base.LogMessagePipeline.FlushAsync()
+  nameWithType: LogMessagePipeline.FlushAsync()
+- uid: L0gg3r.Base.LogMessagePipeline.FlushAsync*
+  name: FlushAsync
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_FlushAsync_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.FlushAsync
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.FlushAsync
+  nameWithType: LogMessagePipeline.FlushAsync
+- uid: L0gg3r.Base.LogMessagePipeline.IsDisposed
+  name: IsDisposed
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_IsDisposed
+  commentId: P:L0gg3r.Base.LogMessagePipeline.IsDisposed
+  fullName: L0gg3r.Base.LogMessagePipeline.IsDisposed
+  nameWithType: LogMessagePipeline.IsDisposed
+- uid: L0gg3r.Base.LogMessagePipeline.IsDisposed*
+  name: IsDisposed
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_IsDisposed_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.IsDisposed
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.IsDisposed
+  nameWithType: LogMessagePipeline.IsDisposed
+- uid: L0gg3r.Base.LogMessagePipeline.LogSinks
+  name: LogSinks
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_LogSinks
+  commentId: P:L0gg3r.Base.LogMessagePipeline.LogSinks
+  fullName: L0gg3r.Base.LogMessagePipeline.LogSinks
+  nameWithType: LogMessagePipeline.LogSinks
+- uid: L0gg3r.Base.LogMessagePipeline.LogSinks*
+  name: LogSinks
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_LogSinks_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.LogSinks
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.LogSinks
+  nameWithType: LogMessagePipeline.LogSinks
+- uid: L0gg3r.Base.LogMessagePipeline.RemoveFilter(System.Predicate{L0gg3r.Base.LogMessage})
+  name: RemoveFilter(Predicate<LogMessage>)
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_RemoveFilter_System_Predicate_L0gg3r_Base_LogMessage__
+  commentId: M:L0gg3r.Base.LogMessagePipeline.RemoveFilter(System.Predicate{L0gg3r.Base.LogMessage})
+  name.vb: RemoveFilter(Predicate(Of LogMessage))
+  fullName: L0gg3r.Base.LogMessagePipeline.RemoveFilter(System.Predicate<L0gg3r.Base.LogMessage>)
+  fullName.vb: L0gg3r.Base.LogMessagePipeline.RemoveFilter(System.Predicate(Of L0gg3r.Base.LogMessage))
+  nameWithType: LogMessagePipeline.RemoveFilter(Predicate<LogMessage>)
+  nameWithType.vb: LogMessagePipeline.RemoveFilter(Predicate(Of LogMessage))
+- uid: L0gg3r.Base.LogMessagePipeline.RemoveFilter*
+  name: RemoveFilter
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_RemoveFilter_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.RemoveFilter
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.RemoveFilter
+  nameWithType: LogMessagePipeline.RemoveFilter
+- uid: L0gg3r.Base.LogMessagePipeline.RemoveLogSink(L0gg3r.Base.ILogSink)
+  name: RemoveLogSink(ILogSink)
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_RemoveLogSink_L0gg3r_Base_ILogSink_
+  commentId: M:L0gg3r.Base.LogMessagePipeline.RemoveLogSink(L0gg3r.Base.ILogSink)
+  fullName: L0gg3r.Base.LogMessagePipeline.RemoveLogSink(L0gg3r.Base.ILogSink)
+  nameWithType: LogMessagePipeline.RemoveLogSink(ILogSink)
+- uid: L0gg3r.Base.LogMessagePipeline.RemoveLogSink*
+  name: RemoveLogSink
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_RemoveLogSink_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.RemoveLogSink
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.RemoveLogSink
+  nameWithType: LogMessagePipeline.RemoveLogSink
+- uid: L0gg3r.Base.LogMessagePipeline.Transform
+  name: Transform
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_Transform
+  commentId: P:L0gg3r.Base.LogMessagePipeline.Transform
+  fullName: L0gg3r.Base.LogMessagePipeline.Transform
+  nameWithType: LogMessagePipeline.Transform
+- uid: L0gg3r.Base.LogMessagePipeline.Transform*
+  name: Transform
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_Transform_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.Transform
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.Transform
+  nameWithType: LogMessagePipeline.Transform
+- uid: L0gg3r.Base.LogMessagePipeline.Write(L0gg3r.Base.LogMessage)
+  name: Write(LogMessage)
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_Write_L0gg3r_Base_LogMessage_
+  commentId: M:L0gg3r.Base.LogMessagePipeline.Write(L0gg3r.Base.LogMessage)
+  fullName: L0gg3r.Base.LogMessagePipeline.Write(L0gg3r.Base.LogMessage)
+  nameWithType: LogMessagePipeline.Write(LogMessage)
+- uid: L0gg3r.Base.LogMessagePipeline.Write*
+  name: Write
+  href: api/L0gg3r.Base.LogMessagePipeline.html#L0gg3r_Base_LogMessagePipeline_Write_
+  commentId: Overload:L0gg3r.Base.LogMessagePipeline.Write
+  isSpec: "True"
+  fullName: L0gg3r.Base.LogMessagePipeline.Write
+  nameWithType: LogMessagePipeline.Write
