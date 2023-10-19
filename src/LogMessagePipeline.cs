@@ -172,6 +172,12 @@ public sealed class LogMessagePipeline : IAsyncDisposable, IEnumerable<ILogSink>
     /// <param name="filter">The filter <see cref="Predicate{T}"/> to add.</param>
     /// <returns>A <see cref="IDisposable"/> that removes the filter from the <see cref="LogMessagePipeline"/> on dispose.</returns>
     /// <exception cref="ObjectDisposedException">Thrown when the <see cref="LogMessagePipeline"/> is disposed.</exception>
+    /// <example>
+    /// The following example shows how to add a filter to the <see cref="LogMessagePipeline"/>:
+    /// [!code-csharp[](../../tests/UnitTests/PipelineTests/AddFilterMethodTests.cs#AddFilter)]
+    /// The following example shows how to remove a filter by disposing the <see cref="IDisposable"/> returned by the <see cref="AddFilter(Predicate{LogMessage})"/> method:
+    /// [!code-csharp[](../../tests/UnitTests/PipelineTests/AddFilterMethodTests.cs#Dispose)]
+    /// </example>
     public IDisposable AddFilter(Predicate<LogMessage> filter)
     {
         ObjectDisposedException.ThrowIf(IsDisposed, this);

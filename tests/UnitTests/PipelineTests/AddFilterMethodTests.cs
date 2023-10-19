@@ -51,4 +51,41 @@ public class TheAddFilterMethod
         // assert
         action.Should().Throw<ObjectDisposedException>();
     }
+
+    [TestMethod]
+    public void Example_ShallAddTheFilter()
+    {
+        #region AddFilter
+        // creating a new log message pipeline
+        LogMessagePipeline logMessagePipeline = new();
+
+        // adding a filter that will only allow log messages with a log level of warning or higher
+        logMessagePipeline.AddFilter(logMessage => logMessage.LogLevel >= LogLevel.Warning);
+        #endregion
+    }
+
+    [TestMethod]
+    public void Example_Dispose()
+    {
+        #region Dispose
+        // creating a new log message pipeline
+        LogMessagePipeline logMessagePipeline = new();
+
+        // adding a filter that will only allow log messages with a log level of warning or higher
+        using (IDisposable disposable = logMessagePipeline.AddFilter(logMessage => logMessage.LogLevel >= LogLevel.Warning))
+        {
+            logMessagePipeline.Write(new LogMessage()
+            {
+                LogLevel = LogLevel.Info,
+                Payload = "This message will not be written"
+            });
+        } // the filter will be removed here
+
+        logMessagePipeline.Write(new LogMessage()
+        {
+            LogLevel = LogLevel.Info,
+            Payload = "This message will be written"
+        });
+        #endregion
+    }
 }
